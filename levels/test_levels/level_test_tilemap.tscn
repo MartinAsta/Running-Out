@@ -380,3 +380,5 @@ layer_0/tile_data = PackedInt32Array(0, 1179649, 12, 65535, 1179649, 12, 65533, 
 position = Vector2(-2, -46)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -55)
+position_smoothing_enabled = true

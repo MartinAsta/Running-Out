@@ -329,7 +329,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5jopl")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.751239
+frame_progress = 0.546138
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("ConvexPolygonShape2D_yee8r")

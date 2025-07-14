@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 const GRAVITY:int = 1000
 const SPEED:int = 10000
+const JUMP_HEIGHT:int = 15000
 
 enum State {IDLE, RUN, JUMP, FALL}
 
@@ -17,6 +18,7 @@ func _physics_process(delta):
 	player_idle()
 	player_run(delta)
 	player_animation()
+	player_jump(delta)
 	
 	move_and_slide()
 
@@ -33,13 +35,22 @@ func player_run(delta):
 	
 	if direction:
 		animated_sprite_2d.flip_h = false if direction > 0 else true
-		current_state = State.RUN
+		if current_state != State.JUMP:
+			current_state = State.RUN
 		velocity.x = direction * SPEED * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+func player_jump(delta):
+	if Input.is_action_pressed("jump") and is_on_floor():
+		current_state = State.JUMP
+		velocity.y -= JUMP_HEIGHT * delta
+
 func player_animation():
 	if current_state == State.IDLE:
 		animated_sprite_2d.play("idle")
-	if current_state == State.RUN:
+	elif current_state == State.JUMP:
+		animated_sprite_2d.play("jump")
+	elif current_state == State.RUN:
 		animated_sprite_2d.play("run")
+	
