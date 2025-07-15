@@ -1,4 +1,3 @@
-res://levels/level.tscn
-res://Characters/Player/player.tscn
 res://levels/test_levels/level_test_tilemap.tscn
+res://Characters/Player/player.tscn
 res://Characters/Player/player.gd
