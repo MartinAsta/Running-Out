@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cl1tpxtm2dgyh"]
+[gd_scene load_steps=49 format=3 uid="uid://cl1tpxtm2dgyh"]
 
 [ext_resource type="Script" uid="uid://osq3mmwmqllu" path="res://Characters/Player/player.gd" id="1_cue0d"]
 [ext_resource type="Texture2D" uid="uid://d3ax70tf0v2o3" path="res://Characters/Player/IDLE.png" id="1_j341n"]
@@ -194,7 +194,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_va6lm")
 }, {
-"duration": 1.0,
+"duration": 300.0,
 "texture": SubResource("AtlasTexture_u2wkb")
 }],
 "loop": false,
@@ -270,7 +270,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_12h2v")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 16.0
 }, {
@@ -316,6 +316,9 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xf5fp"]
+height = 32.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_cue0d")
@@ -323,26 +326,22 @@ script = ExtResource("1_cue0d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_5jopl")
-animation = &"run"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.793698
+frame = 12
+frame_progress = 1.0
 
-[node name="Collision_IDLE" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(6, 0, 10, -8, 10, -12, 7, -16, 8, -24, 5, -31, -1, -31, -6, -27, -6, -18, -9, -12, -8, 0)
-disabled = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_xf5fp")
 
-[node name="Collision_FALL" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(6, -2, 8, -12, 11, -18, 8, -20, 8, -24, 5, -31, -1, -31, -6, -27, -10, -18, -10, -14, -6, -3)
-disabled = true
+[node name="JumpHeightVariationTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
-[node name="Collision_JUMP" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(7, -4, 9, -14, 7, -22, 7, -27, 9, -35, 5, -38, -1, -36, -5, -31, -4, -25, -6, -14, -6, -2)
-disabled = true
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
 
-[node name="Collision_RUN" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(5, 0, 10, -10, 7, -15, 9, -20, 10, -27, 7, -31, 2, -31, -4, -26, -4, -18, -10, -9, -6, 0)
-disabled = true
+[connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]

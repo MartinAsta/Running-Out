@@ -1,46 +1,46 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var collision_idle = $Collision_IDLE
-@onready var collision_fall = $Collision_FALL
-@onready var collision_jump = $Collision_JUMP
-@onready var collision_run = $Collision_RUN
+@onready var jump_height_variation_timer = $JumpHeightVariationTimer
+@onready var coyote_jump_timer = $CoyoteJumpTimer
 
-const GRAVITY:int = 1000
+const GRAVITY:int = 900
 const SPEED:int = 10000
-const JUMP_HEIGHT:int = 15000
+const JUMP_HEIGHT:int = 14000
 
 enum State {IDLE, RUN, JUMP, FALL}
 
 var current_state:State
 var is_facing_right:bool = true
+var can_go_higher:bool
+var was_on_floor:bool
 
-func _ready():
-	set_state(State.IDLE)
+func _ready() -> void:
+	current_state = State.IDLE
 
-func _physics_process(delta):
-	Engine.time_scale = 0.2
-	print(collision_idle.disabled)
-	print(collision_fall.disabled)
-	print(collision_jump.disabled)
-	print(collision_run.disabled)
+func _physics_process(delta) -> void:
 	player_falling(delta)
 	player_idle()
 	player_run(delta)
 	player_animation()
 	player_jump(delta)
 	
+	was_on_floor = is_on_floor()
 	move_and_slide()
+	if !is_on_floor() and was_on_floor and velocity.y >= 0:
+		coyote_jump_timer.start()
 
-func player_falling(delta):
+func player_falling(delta) -> void:
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
+		if velocity.y > 0:
+			current_state = State.FALL
 
-func player_idle():
+func player_idle() -> void:
 	if is_on_floor() and Input.get_axis("move_left", "move_right") == 0 and current_state != State.IDLE:
-		set_state(State.IDLE)
+		current_state = State.IDLE
 
-func player_run(delta):
+func player_run(delta) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
 	
 	if direction != 0:
@@ -50,52 +50,37 @@ func player_run(delta):
 		elif direction < 0 && is_facing_right :
 			is_facing_right = !is_facing_right
 			scale.x *= -1
-		if current_state != State.JUMP:
-			set_state(State.RUN)
+		if is_on_floor():
+			current_state = State.RUN
 		velocity.x = direction * SPEED * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-func player_jump(delta):
-	if Input.is_action_pressed("jump") and is_on_floor():
-		set_state(State.JUMP)
-		velocity.y -= JUMP_HEIGHT * delta
+func player_jump(delta) -> void:
+	if Input.is_action_pressed("jump"):
+		if is_on_floor() or !coyote_jump_timer.is_stopped():
+			velocity.y = 0
+			coyote_jump_timer.stop()
+			jump_height_variation_timer.start()
+			can_go_higher = true
+			current_state = State.JUMP
+			velocity.y -= JUMP_HEIGHT * delta
+		if can_go_higher:
+			velocity.y -= JUMP_HEIGHT/20 * delta
 
-func player_animation():
+func player_animation() -> void:
 	if current_state == State.IDLE:
 		animated_sprite_2d.play("idle")
 	elif current_state == State.JUMP:
 		animated_sprite_2d.play("jump")
 	elif current_state == State.RUN:
 		animated_sprite_2d.play("run")
+	elif current_state == State.FALL:
+		animated_sprite_2d.play("fall")
 
-func disable_hitbox(state:State):
-	match state:
-		State.RUN:
-			collision_run.disabled = true
-		State.IDLE:
-			collision_idle.disabled = true
-		State.JUMP:
-			collision_jump.disabled = true
-		State.FALL:
-			collision_fall.disabled = true
+func _on_jump_height_variation_timer_timeout() -> void:
+	can_go_higher = false
 
-func enable_hitbox(state:State):
-	match state:
-		State.RUN:
-			collision_run.disabled = false
-		State.IDLE:
-			collision_idle.disabled = false
-		State.JUMP:
-			collision_jump.disabled = false
-		State.FALL:
-			collision_fall.disabled = false
 
-func set_state(new_state:State):
-	if new_state == current_state:
-		return
-	if current_state:
-		disable_hitbox(current_state)
-	current_state = new_state
-	enable_hitbox(current_state)
-	
+func _on_coyote_jump_timer_timeout():
+	pass # Replace with function body.
