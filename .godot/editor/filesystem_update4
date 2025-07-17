@@ -1,3 +1,5 @@
-res://Characters/Player/player.tscn
-res://Characters/Player/player.gd
 res://levels/test_levels/level_test_tilemap.tscn
+res://levels/test_levels/level_test_enemies.tscn
+res://Characters/Player/player.tscn
+res://Characters/Enemies/EnemyRaptor/enemy_raptor.tscn
+res://Characters/Enemies/EnemyRaptor/enemy_raptor.gd

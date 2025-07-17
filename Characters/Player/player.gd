@@ -22,13 +22,13 @@ func _physics_process(delta) -> void:
 	player_falling(delta)
 	player_idle()
 	player_run(delta)
-	player_animation()
 	player_jump(delta)
 	
 	was_on_floor = is_on_floor()
 	move_and_slide()
 	if !is_on_floor() and was_on_floor and velocity.y >= 0:
 		coyote_jump_timer.start()
+	player_animation()
 
 func player_falling(delta) -> void:
 	if !is_on_floor():
@@ -65,8 +65,8 @@ func player_jump(delta) -> void:
 			can_go_higher = true
 			current_state = State.JUMP
 			velocity.y -= JUMP_HEIGHT * delta
-		if can_go_higher:
-			velocity.y -= JUMP_HEIGHT/20 * delta
+		elif can_go_higher:
+			velocity.y -= JUMP_HEIGHT/22 * delta
 
 func player_animation() -> void:
 	if current_state == State.IDLE:
@@ -80,7 +80,3 @@ func player_animation() -> void:
 
 func _on_jump_height_variation_timer_timeout() -> void:
 	can_go_higher = false
-
-
-func _on_coyote_jump_timer_timeout():
-	pass # Replace with function body.
