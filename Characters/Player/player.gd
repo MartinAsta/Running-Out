@@ -8,7 +8,7 @@ const GRAVITY:int = 900
 const SPEED:int = 10000
 const JUMP_HEIGHT:int = 14000
 
-enum State {IDLE, RUN, JUMP, FALL}
+enum State {IDLE, RUN, JUMP, FALL, WALL}
 
 var current_state:State
 var is_facing_right:bool = true
@@ -31,10 +31,15 @@ func _physics_process(delta) -> void:
 	player_animation()
 
 func player_falling(delta) -> void:
-	if !is_on_floor():
+	if !is_on_floor() and !is_on_wall():
 		velocity.y += GRAVITY * delta
 		if velocity.y > 0:
 			current_state = State.FALL
+	elif !is_on_floor() and is_on_wall() and (Input.get_axis("move_left", "move_right") != 0 and velocity.x == 0):
+		if current_state != State.WALL:
+			velocity.y = 0
+		velocity.y += (GRAVITY * delta)
+		current_state = State.WALL
 
 func player_idle() -> void:
 	if is_on_floor() and Input.get_axis("move_left", "move_right") == 0 and current_state != State.IDLE:
@@ -77,6 +82,8 @@ func player_animation() -> void:
 		animated_sprite_2d.play("run")
 	elif current_state == State.FALL:
 		animated_sprite_2d.play("fall")
+	elif current_state == State.WALL:
+		animated_sprite_2d.play("wall")
 
 func _on_jump_height_variation_timer_timeout() -> void:
 	can_go_higher = false

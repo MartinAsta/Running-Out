@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg3bhc2gbw47y"]
+
+[ext_resource type="PackedScene" uid="uid://bj530hbq1crr0" path="res://levels/test_levels/level_test_tilemap.tscn" id="1_gc5lp"]
+[ext_resource type="Texture2D" uid="uid://civowmu1andj2" path="res://assets/Background_W1_2.png" id="2_hh4gg"]
+[ext_resource type="Texture2D" uid="uid://djirxaye6cgb3" path="res://assets/Background_W1_1.png" id="3_iypfw"]
+
+[node name="level_test_tilemap" instance=ExtResource("1_gc5lp")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="BackgroundParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+position = Vector2(0, -816)
+motion_mirroring = Vector2(2976, 0)
+
+[node name="BG1Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundParallaxLayer" index="0"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_hh4gg")
+centered = false
+
+[node name="BG2Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundParallaxLayer" index="1"]
+position = Vector2(1488, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("2_hh4gg")
+centered = false
+
+[node name="MiddlegroundParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+position = Vector2(0, -816)
+motion_scale = Vector2(1.2, 1)
+motion_mirroring = Vector2(2976, 0)
+
+[node name="MG1Sprite2D" type="Sprite2D" parent="ParallaxBackground/MiddlegroundParallaxLayer2" index="0"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_iypfw")
+centered = false
+
+[node name="MG2Sprite2D" type="Sprite2D" parent="ParallaxBackground/MiddlegroundParallaxLayer2" index="1"]
+position = Vector2(1488, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_iypfw")
+centered = false
