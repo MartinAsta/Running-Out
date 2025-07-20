@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cl1tpxtm2dgyh"]
+[gd_scene load_steps=56 format=3 uid="uid://cl1tpxtm2dgyh"]
 
 [ext_resource type="Script" uid="uid://osq3mmwmqllu" path="res://Characters/Player/player.gd" id="1_cue0d"]
 [ext_resource type="Texture2D" uid="uid://d3ax70tf0v2o3" path="res://Characters/Player/IDLE.png" id="1_j341n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://lp7m5at2e4kr" path="res://Characters/Player/FALL.png" id="2_xf5fp"]
 [ext_resource type="Texture2D" uid="uid://6mtnyi01f1qd" path="res://Characters/Player/JUMP.png" id="4_osktb"]
 [ext_resource type="Texture2D" uid="uid://dnt8djqei8c67" path="res://Characters/Player/WALL.png" id="6_osktb"]
+[ext_resource type="Texture2D" uid="uid://bjuygsx1n1fcd" path="res://Characters/Player/WALLWALK.png" id="7_7vev3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xf5fp"]
 atlas = ExtResource("2_xf5fp")
@@ -175,6 +176,22 @@ region = Rect2(88, 132, 44, 44)
 atlas = ExtResource("6_osktb")
 region = Rect2(0, 0, 44, 44)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_evul0"]
+atlas = ExtResource("7_7vev3")
+region = Rect2(0, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfh3i"]
+atlas = ExtResource("7_7vev3")
+region = Rect2(44, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdgmf"]
+atlas = ExtResource("7_7vev3")
+region = Rect2(0, 44, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldp5e"]
+atlas = ExtResource("7_7vev3")
+region = Rect2(44, 44, 44, 44)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5jopl"]
 animations = [{
 "frames": [{
@@ -327,6 +344,23 @@ animations = [{
 "loop": false,
 "name": &"wall",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evul0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfh3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdgmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldp5e")
+}],
+"loop": false,
+"name": &"wall_walk",
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xf5fp"]
@@ -339,8 +373,9 @@ script = ExtResource("1_cue0d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_5jopl")
-animation = &"wall"
+animation = &"wall_walk"
 autoplay = "idle"
+frame = 3
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -355,4 +390,13 @@ one_shot = true
 wait_time = 0.125
 one_shot = true
 
+[node name="WallJumpHeightVariationTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="CoyoteWalljumpTimer" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
+
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
+[connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
