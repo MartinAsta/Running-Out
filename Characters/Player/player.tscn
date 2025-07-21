@@ -395,7 +395,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="CoyoteWalljumpTimer" type="Timer" parent="."]
-wait_time = 0.125
+wait_time = 0.1
 one_shot = true
 
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
