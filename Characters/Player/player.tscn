@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cl1tpxtm2dgyh"]
+[gd_scene load_steps=57 format=3 uid="uid://cl1tpxtm2dgyh"]
 
 [ext_resource type="Script" uid="uid://osq3mmwmqllu" path="res://Characters/Player/player.gd" id="1_cue0d"]
 [ext_resource type="Texture2D" uid="uid://d3ax70tf0v2o3" path="res://Characters/Player/IDLE.png" id="1_j341n"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://6mtnyi01f1qd" path="res://Characters/Player/JUMP.png" id="4_osktb"]
 [ext_resource type="Texture2D" uid="uid://dnt8djqei8c67" path="res://Characters/Player/WALL.png" id="6_osktb"]
 [ext_resource type="Texture2D" uid="uid://bjuygsx1n1fcd" path="res://Characters/Player/WALLWALK.png" id="7_7vev3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohm8s"]
+atlas = ExtResource("2_cue0d")
+region = Rect2(88, 44, 44, 44)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xf5fp"]
 atlas = ExtResource("2_xf5fp")
@@ -196,6 +200,14 @@ region = Rect2(44, 44, 44, 44)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ohm8s")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xf5fp")
 }, {
 "duration": 1.0,
@@ -373,10 +385,8 @@ script = ExtResource("1_cue0d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_5jopl")
-animation = &"wall_walk"
+animation = &"dash"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
@@ -398,5 +408,15 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="DashCoolDownTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
+[connection signal="timeout" from="DashCoolDownTimer" to="." method="_on_dash_cool_down_timer_timeout"]
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
