@@ -1,5 +1,5 @@
-res://Characters/Player/player.tscn
-res://Characters/Player/player.gd
 res://levels/test_levels/level_test_tilemap.tscn
+res://Characters/Player/player.tscn
 res://levels/test_levels/level_test_parallax_background.tscn
 res://levels/World1/W1_map1.tscn
+res://Characters/Player/player.gd

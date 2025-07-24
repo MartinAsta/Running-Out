@@ -11,7 +11,8 @@ extends CharacterBody2D
 const GRAVITY:int = 900
 const SPEED:int = 10000
 const JUMP_HEIGHT:int = 14000
-const DASH_SPEED:int = 25000
+const DASH_SPEED_X:int = 13000
+const DASH_SPEED_Y:int = 10000
 
 enum State {IDLE, RUN, JUMP, FALL, WALL, WALLWALK, DASH}
 
@@ -48,6 +49,8 @@ func _physics_process(delta) -> void:
 	player_animation()
 
 func player_falling(delta) -> void:
+	if is_dashing:
+		return
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 		if velocity.y > 0:
@@ -136,12 +139,14 @@ func player_dash(delta) -> void:
 	if !can_dash and !is_dashing:
 		return
 	if is_dashing:
-		velocity.x += dash_direction.x * DASH_SPEED * delta / 2
-		velocity.y += dash_direction.y * DASH_SPEED * delta / 2
+		if dash_direction.x != 0 and dash_direction.y != 0:
+			velocity.x += (dash_direction.x * DASH_SPEED_X * delta / 4)*0.8
+			velocity.y += (dash_direction.y * DASH_SPEED_Y * delta / 4)*0.8
+		else:
+			velocity.x += dash_direction.x * DASH_SPEED_X * delta / 4
+			velocity.y += dash_direction.y * DASH_SPEED_Y * delta / 4
 		current_state = State.DASH
 	elif Input.is_action_just_pressed("dash"):
-		velocity.x = 0
-		velocity.y = 0
 		if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_up"):
 			dash_direction = Vector2(1,-1)
 		elif Input.is_action_pressed("move_right") and Input.is_action_pressed("move_down"):
@@ -162,8 +167,8 @@ func player_dash(delta) -> void:
 			dash_direction = Vector2(1,0)
 		elif !is_facing_right:
 			dash_direction = Vector2(-1,0)
-		velocity.x += dash_direction.x * DASH_SPEED * delta
-		velocity.y += dash_direction.y * DASH_SPEED * delta
+		velocity.x = dash_direction.x * DASH_SPEED_X * delta if dash_direction.y == 0 else (dash_direction.x * DASH_SPEED_X * delta)*0.8
+		velocity.y = dash_direction.y * DASH_SPEED_Y * delta if dash_direction.x == 0 else (dash_direction.y * DASH_SPEED_Y * delta)*0.8
 		can_dash = false
 		is_dashing = true
 		dash_cool_down_timer.start()
@@ -198,3 +203,4 @@ func _on_dash_cool_down_timer_timeout():
 func _on_dash_duration_timer_timeout():
 	is_dashing = false
 	dash_direction = Vector2(0,0)
+	velocity.y = move_toward(velocity.y, 0, 500)
