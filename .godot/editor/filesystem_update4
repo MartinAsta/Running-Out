@@ -1,5 +1,5 @@
-res://levels/test_levels/level_test_tilemap.tscn
+res://levels/World0/W0_map1.tscn
+res://Tilesets/game_tile_set.tres
 res://Characters/Player/player.tscn
-res://levels/test_levels/level_test_parallax_background.tscn
-res://levels/World1/W1_map1.tscn
-res://Characters/Player/player.gd
+res://scenes/test/GroundSceneTilemap.tscn
+res://script/game_manager.gd

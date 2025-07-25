@@ -1,6 +1,9 @@
+res://Tilesets
+res://levels/World0
+res://levels/test_levels
+res://script
 res://Characters/Player
 res://levels/World1
-res://levels/test_levels
 res://Characters/Enemies/EnemyRaptor
 res://Characters/Enemies
 res://levels

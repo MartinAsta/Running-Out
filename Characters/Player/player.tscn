@@ -416,6 +416,10 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="DashCoolDownTimer" to="." method="_on_dash_cool_down_timer_timeout"]
