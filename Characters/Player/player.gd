@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -33,11 +34,15 @@ func _ready() -> void:
 func _physics_process(delta) -> void:
 	player_falling(delta)
 	player_idle()
-	player_run(delta)
-	player_jump(delta)
-	player_slide_wall(delta)
-	player_wall_jump(delta)
-	player_dash(delta)
+	if !PlayerStateManager.is_in_cutscene:
+		player_run(delta)
+		player_jump(delta)
+		player_slide_wall(delta)
+		player_wall_jump(delta)
+		player_dash(delta)
+	else:
+		velocity.x = 0
+		current_state = State.IDLE
 	
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
@@ -87,7 +92,7 @@ func player_run(delta) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 func player_jump(delta) -> void:
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or !coyote_jump_timer.is_stopped():
 			velocity.y = 0
 			coyote_jump_timer.stop()
@@ -95,7 +100,7 @@ func player_jump(delta) -> void:
 			can_go_higher = true
 			current_state = State.JUMP
 			velocity.y -= JUMP_HEIGHT * delta
-		elif can_go_higher:
+	elif Input.is_action_pressed("jump") and can_go_higher:
 			velocity.y -= JUMP_HEIGHT/22 * delta
 			
 func player_slide_wall(delta) -> void:
@@ -136,7 +141,7 @@ func player_wall_jump(delta) -> void:
 			velocity.y -= JUMP_HEIGHT/22 * delta
 
 func player_dash(delta) -> void:
-	if !can_dash and !is_dashing:
+	if (!can_dash and !is_dashing) or !PlayerStateManager.has_unlocked_dash:
 		return
 	if is_dashing:
 		if dash_direction.x != 0 and dash_direction.y != 0:

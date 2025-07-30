@@ -17,6 +17,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://script/game_manager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+PlayerStateManager="*res://script/player_manager.gd"
+TimeStateManager="*res://script/time_manager.gd"
 
 [display]
 
@@ -25,19 +28,29 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 window/canvas_textures/default_texture_filter=3
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://Characters/": "red",
+"res://Dialogue/": "teal",
 "res://Tilesets/": "pink",
 "res://assets/": "green",
 "res://levels/": "pink",
 "res://scenes/": "orange",
 "res://script/": "yellow"
 }
+
+[global_group]
+
+Cutscene=""
+Player=""
+World=""
 
 [input]
 
@@ -82,10 +95,15 @@ move_down={
 ]
 }
 
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/conversations/tutorial.dialogue")
+
 [layer_names]
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
+2d_physics/layer_3="Cutscene"
 
 [rendering]
 

@@ -378,8 +378,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xf5fp"]
 height = 32.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_cue0d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -417,8 +418,18 @@ wait_time = 0.2
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = -800
+limit_bottom = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+editor_draw_limits = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_xf5fp")
 
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
