@@ -8,3 +8,7 @@ res://scenes/test/GroundSceneTilemap.tscn
 res://Dialogue/tutorial_dialogue_balloon.tscn
 res://levels/World0/tutorial_cutscene_trigger.gd
 res://addons/dialogue_manager/dialogue_manager.gd
+res://Characters/NPC/Portal/portal.tscn
+res://script/game_manager.gd
+res://Characters/NPC/Portal/portal.gd
+res://Characters/NPC/Portal/interaction_area_2d.gd

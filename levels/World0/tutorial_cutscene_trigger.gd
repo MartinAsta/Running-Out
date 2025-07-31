@@ -11,7 +11,6 @@ func _ready() -> void:
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		player = body
-		PlayerStateManager.enter_cutscene()
 		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
 		get_tree().current_scene.add_child(balloon)
 		balloon.start(load("res://Dialogue/conversations/tutorial.dialogue"), "start")

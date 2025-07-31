@@ -17,35 +17,7 @@ lines = {
 &"type": "title"
 },
 "1": {
-&"character": "Martin",
 &"id": "1",
-&"next_id": "2",
-&"text": "!!!",
-&"type": "dialogue"
-},
-"2": {
-&"character": "Martin",
-&"id": "2",
-&"next_id": "3",
-&"text": "There is no way I can jump over that gap...",
-&"type": "dialogue"
-},
-"3": {
-&"character": "Martin",
-&"id": "3",
-&"next_id": "4",
-&"text": "What do I do now...",
-&"type": "dialogue"
-},
-"4": {
-&"character": "Martin",
-&"id": "4",
-&"next_id": "5",
-&"text": "This wave is closing in. I need to try.",
-&"type": "dialogue"
-},
-"5": {
-&"id": "5",
 &"mutation": {
 &"expression": Array[Dictionary]([{
 &"i": 3,
@@ -55,18 +27,46 @@ lines = {
 &"i": 21,
 &"type": &"dot"
 }, {
-&"function": "unlock_dash",
+&"function": "enter_cutscene",
 &"i": 22,
 &"type": &"function",
 &"value": Array[Array]([Array[Dictionary]([{
-&"i": 34,
+&"i": 37,
 &"type": &"parens_close"
 }])])
 }]),
 &"is_blocking": true
 },
-&"next_id": "6",
+&"next_id": "2",
 &"type": "mutation"
+},
+"2": {
+&"character": "Martin",
+&"id": "2",
+&"next_id": "3",
+&"text": "!!!",
+&"type": "dialogue"
+},
+"3": {
+&"character": "Martin",
+&"id": "3",
+&"next_id": "4",
+&"text": "There is no way I can jump over that gap...",
+&"type": "dialogue"
+},
+"4": {
+&"character": "Martin",
+&"id": "4",
+&"next_id": "5",
+&"text": "What do I do now...",
+&"type": "dialogue"
+},
+"5": {
+&"character": "Martin",
+&"id": "5",
+&"next_id": "6",
+&"text": "This wave is closing in. I need to try.",
+&"type": "dialogue"
 },
 "6": {
 &"id": "6",
@@ -132,11 +132,11 @@ lines = {
 }
 }
 raw_text = "~ start
+do PlayerStateManager.enter_cutscene()
 Martin: !!!
 Martin: There is no way I can jump over that gap...
 Martin: What do I do now...
 Martin: This wave is closing in. I need to try.
-do PlayerStateManager.unlock_dash()
 do TimeStateManager.tutorial_appear()
 do DialogueManager.dialogue_ends()
 => END"

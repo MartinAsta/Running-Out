@@ -1,7 +1,7 @@
-AnimatedSprite2D
-Timer
 CollisionShape2D
 Area2D
+AnimatedSprite2D
+Timer
 Sprite2D
 ParallaxLayer
 ParallaxBackground

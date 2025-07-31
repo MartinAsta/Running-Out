@@ -1,9 +1,9 @@
 ~ start
+do PlayerStateManager.enter_cutscene()
 Martin: !!!
 Martin: There is no way I can jump over that gap...
 Martin: What do I do now...
 Martin: This wave is closing in. I need to try.
-do PlayerStateManager.unlock_dash()
 do TimeStateManager.tutorial_appear()
 do DialogueManager.dialogue_ends()
 => END
