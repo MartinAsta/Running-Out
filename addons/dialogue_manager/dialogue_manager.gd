@@ -27,6 +27,7 @@ signal mutated(mutation: Dictionary)
 
 ## Emitted when some dialogue has reached the end.
 signal dialogue_ended(resource: DialogueResource)
+signal dialogue_has_ended
 
 ## Used internally.
 signal bridge_get_next_dialogue_line_completed(line: DialogueLine)
@@ -1481,3 +1482,6 @@ func _resolve_thing_method(thing, method: String, args: Array):
 	var dotnet_dialogue_manager = _get_dotnet_dialogue_manager()
 	dotnet_dialogue_manager.ResolveThingMethod(thing, method, args)
 	return await dotnet_dialogue_manager.Resolved
+
+func dialogue_ends() -> void:
+	dialogue_has_ended.emit()

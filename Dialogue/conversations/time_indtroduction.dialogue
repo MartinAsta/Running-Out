@@ -1,0 +1,10 @@
+~ start
+TIME: YOU.
+Martin: Wha-!
+TIME: BE QUIET.
+TIME: THIS WORLD IS RUNNING OUT OF TIME.
+TIME: I HAVE LET ENTROPY RUN ITS COURSE FAR TOO LONG.
+TIME: STEP THROUGH THIS PORTAL AND I SHALL EXPLAIN MYSELF FURTHER... ELSEWHERE.
+do PlayerStateManager.leave_cutscene()
+do TimeStateManager.on_tutorial_disappear()
+=> END

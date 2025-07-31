@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b24rnee475ved"
-path="res://.godot/imported/Agis2.png-9f2c96d702f6aa6c4a3e8a77ac8e4061.ctex"
+uid="uid://dfsgv27mqw52"
+path="res://.godot/imported/586b.png-91e87a69537df8310213fa186b239150.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/NPC/Time/Agis2.png"
-dest_files=["res://.godot/imported/Agis2.png-9f2c96d702f6aa6c4a3e8a77ac8e4061.ctex"]
+source_file="res://Characters/NPC/Time/586b.png"
+dest_files=["res://.godot/imported/586b.png-91e87a69537df8310213fa186b239150.ctex"]
 
 [params]
 
