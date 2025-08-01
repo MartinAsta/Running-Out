@@ -54,7 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ap315"]
-size = Vector2(24, 39)
+size = Vector2(34, 39)
 
 [node name="Portal" type="Node2D"]
 script = ExtResource("1_ap315")
@@ -66,7 +66,8 @@ sprite_frames = SubResource("SpriteFrames_g868m")
 autoplay = "default"
 frame_progress = 0.968457
 
-[node name="InteractionArea2D" type="Area2D" parent="."]
+[node name="InteractionArea2D" type="Area2D" parent="." groups=["Interactible"]]
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
@@ -75,3 +76,4 @@ shape = SubResource("RectangleShape2D_ap315")
 debug_color = Color(0.569516, 0.556276, 3.85046e-07, 0.42)
 
 [connection signal="body_entered" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_entered"]
+[connection signal="body_exited" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dvd8hr46j35kp"]
+[gd_scene load_steps=49 format=3 uid="uid://dvd8hr46j35kp"]
 
 [ext_resource type="Script" uid="uid://kaalwvqyfsom" path="res://Characters/NPC/Time/time.gd" id="1_jcc5n"]
 [ext_resource type="Texture2D" uid="uid://c3yh475aovhjy" path="res://Characters/NPC/Time/Agis.png" id="2_jcc5n"]
@@ -329,6 +329,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7ktt"]
+size = Vector2(82, 293)
+
 [node name="Time" type="Node2D" groups=["TimeNPC"]]
 script = ExtResource("1_jcc5n")
 
@@ -336,5 +339,17 @@ script = ExtResource("1_jcc5n")
 z_index = -1
 position = Vector2(0, -160)
 sprite_frames = SubResource("SpriteFrames_ydkdv")
-animation = &"disappear"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.0570689
+
+[node name="InteractionArea2D" type="Area2D" parent="." groups=["Interactible"]]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
+position = Vector2(0, -151)
+shape = SubResource("RectangleShape2D_o7ktt")
+
+[connection signal="body_entered" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_entered"]
+[connection signal="body_exited" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_exited"]

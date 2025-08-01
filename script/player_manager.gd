@@ -1,8 +1,12 @@
 class_name PlayerManager
 extends Node
 
-var has_unlocked_dash:bool = false
-var is_in_cutscene:bool = false
+var has_unlocked_dash:bool
+var is_in_cutscene:bool
+
+func _ready() -> void:
+	has_unlocked_dash = false
+	is_in_cutscene = false
 
 func unlock_dash() -> void:
 	has_unlocked_dash = true

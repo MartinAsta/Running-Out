@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var coyote_walljump_timer = $CoyoteWalljumpTimer
 @onready var dash_cool_down_timer = $DashCoolDownTimer
 @onready var dash_duration_timer = $DashDurationTimer
+@onready var interaction_label = $InteractionLabel
 
 const GRAVITY:int = 900
 const SPEED:int = 10000
@@ -27,6 +28,8 @@ var was_on_wall:bool
 var can_dash:bool = true
 var is_dashing:bool = false
 var dash_direction:Vector2
+var can_take_portal:bool = false
+var can_initiate_dialogue:bool =false
 
 func _ready() -> void:
 	current_state = State.IDLE
@@ -40,6 +43,8 @@ func _physics_process(delta) -> void:
 		player_slide_wall(delta)
 		player_wall_jump(delta)
 		player_dash(delta)
+		take_portal()
+		initiate_dialogue()
 	else:
 		velocity.x = 0
 		current_state = State.IDLE
@@ -74,10 +79,9 @@ func player_run(delta) -> void:
 	if direction != 0 or !wall_jump_height_variation_timer.is_stopped():
 		if direction > 0 && !is_facing_right :
 			is_facing_right = !is_facing_right
-			scale.x *= -1
 		elif direction < 0 && is_facing_right :
 			is_facing_right = !is_facing_right
-			scale.x *= -1
+		animated_sprite_2d.flip_h = true if !is_facing_right else false
 		if is_on_floor():
 			current_state = State.RUN
 		if(!wall_jump_height_variation_timer.is_stopped()):
@@ -180,6 +184,18 @@ func player_dash(delta) -> void:
 		dash_duration_timer.start()
 		current_state = State.DASH
 
+func take_portal() -> void:
+	if !can_take_portal:
+		return
+	if Input.is_action_just_pressed("interact"):
+		GameManager.player_takes_portal()
+
+func initiate_dialogue() -> void:
+	if !can_initiate_dialogue:
+		return
+	if Input.is_action_just_pressed("interact"):
+		TimeStateManager.start_dialogue()
+
 func player_animation() -> void:
 	if current_state == State.IDLE:
 		animated_sprite_2d.play("idle")
@@ -209,3 +225,17 @@ func _on_dash_duration_timer_timeout():
 	is_dashing = false
 	dash_direction = Vector2(0,0)
 	velocity.y = move_toward(velocity.y, 0, 500)
+
+func enable_interaction_label() -> void:
+	if PlayerStateManager.is_in_cutscene:
+		return
+	interaction_label.visible = true
+
+func disable_interaction_label() -> void:
+	interaction_label.visible = false
+
+func set_can_take_portal(b:bool) -> void:
+	can_take_portal = b
+
+func set_can_initiate_dialogue(b:bool) -> void:
+	can_initiate_dialogue = b

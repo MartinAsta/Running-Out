@@ -1,0 +1,6 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: blabla
+do PlayerStateManager.leave_cutscene()
+do PlayerStateManager.unlock_dash()
+=> END

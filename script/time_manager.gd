@@ -2,11 +2,14 @@ class_name TimeManager
 extends Node
 
 var time_npc_scene = preload("res://Characters/NPC/Time/time.tscn")
+var introduction_flag:bool
 
 signal tutorial_appearance()
+signal trigger_dialogue()
 
 func _ready() -> void:
 	connect("tutorial_appearance", on_tutorial_appear)
+	introduction_flag = false
 
 func tutorial_appear() -> void:
 	tutorial_appearance.emit()
@@ -33,3 +36,6 @@ func on_tutorial_disappear() -> void:
 		if node.is_in_group("TimeNPC"):
 			npc = node
 	npc.disappear()
+
+func start_dialogue() -> void:
+	trigger_dialogue.emit()
