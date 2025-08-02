@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=4 uid="uid://d23n8hoapqq87"]
+[gd_scene load_steps=8 format=4 uid="uid://d23n8hoapqq87"]
 
 [ext_resource type="PackedScene" uid="uid://taqarnefwhp3" path="res://scenes/test/W1_parallax_bg.tscn" id="1_mwt3h"]
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="2_ep35d"]
 [ext_resource type="PackedScene" uid="uid://dvd8hr46j35kp" path="res://Characters/NPC/Time/time.tscn" id="3_ep35d"]
 [ext_resource type="PackedScene" uid="uid://cl1tpxtm2dgyh" path="res://Characters/Player/player.tscn" id="4_u8rhs"]
+[ext_resource type="PackedScene" uid="uid://b2uux8ix0myt" path="res://scenes/fall_detection_area_2d.tscn" id="5_dvlg1"]
+[ext_resource type="PackedScene" uid="uid://dd0ubona27lnr" path="res://scenes/checkpoint.tscn" id="6_vwny1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwny1"]
+size = Vector2(3199, 32)
 
 [node name="Lobby" type="Node2D"]
 
@@ -15,9 +20,6 @@ tile_map_data = PackedByteArray("AAAlAAgAAQADAAwAAAAlAAcAAQADAAwAAAAlAAYAAQADAAw
 [node name="Time" parent="." instance=ExtResource("3_ep35d")]
 position = Vector2(456, -70)
 
-[node name="SpawningPointMarker2D" type="Marker2D" parent="." groups=["SpawnMarker"]]
-position = Vector2(102, -39)
-
 [node name="Player" parent="." instance=ExtResource("4_u8rhs")]
 position = Vector2(103, -40)
 
@@ -26,3 +28,14 @@ offset = Vector2(0, -80)
 limit_left = -250
 limit_right = 1500
 limit_bottom = 150
+
+[node name="FallDetectionArea2D" parent="." node_paths=PackedStringArray("collision_shape_2d") instance=ExtResource("5_dvlg1")]
+position = Vector2(-122, 110)
+collision_shape_2d = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallDetectionArea2D"]
+position = Vector2(485.5, 6)
+shape = SubResource("RectangleShape2D_vwny1")
+
+[node name="Checkpoint" parent="FallDetectionArea2D" instance=ExtResource("6_vwny1")]
+position = Vector2(225, -145)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2uux8ix0myt"]
+
+[ext_resource type="Script" uid="uid://ddapqq3jy8uxu" path="res://scenes/fall_detection_area_2d.gd" id="1_yn504"]
+
+[node name="FallDetectionArea2D" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_yn504")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

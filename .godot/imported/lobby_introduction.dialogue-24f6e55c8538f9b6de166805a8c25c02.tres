@@ -8,7 +8,7 @@ using_states = PackedStringArray()
 titles = {
 "start": "1"
 }
-character_names = PackedStringArray("TIME")
+character_names = PackedStringArray("TIME", "Martin")
 first_title = "0"
 lines = {
 "0": {
@@ -40,15 +40,48 @@ lines = {
 &"next_id": "2",
 &"type": "mutation"
 },
-"2": {
-&"character": "TIME",
-&"id": "2",
-&"next_id": "3",
-&"text": "blabla",
+"10": {
+&"character": "Martin",
+&"id": "10",
+&"next_id": "11",
+&"text": "Sand ?",
 &"type": "dialogue"
 },
-"3": {
-&"id": "3",
+"11": {
+&"character": "TIME",
+&"id": "11",
+&"next_id": "12",
+&"text": "A FRAGMENT OF MY DECAYING BODY. YOU CAN DRAW POWER FROM IT.",
+&"type": "dialogue"
+},
+"12": {
+&"character": "TIME",
+&"id": "12",
+&"next_id": "13",
+&"text": "YOU WILL INEVITABLY FIND MORE OF IT IN YOUR ATTEMPTS. BRING IT BACK TO ME AND I WILL MAKE YOU MORE POWERFUL.",
+&"type": "dialogue"
+},
+"13": {
+&"id": "13",
+&"next_id": "14",
+&"text": "You received a fistful of sand. It immediately seems to sink into the pores of your hand.",
+&"type": "dialogue"
+},
+"14": {
+&"character": "TIME",
+&"id": "14",
+&"next_id": "15",
+&"text": "NOW GO. I WILL BRING YOU BACK HERE EVERYTIME YOU FAIL... UNTIL YOU DON'T.",
+&"type": "dialogue"
+},
+"15": {
+&"id": "15",
+&"next_id": "16",
+&"text": "You can now dash using Shift (keyboard) or B (Xbox controller)",
+&"type": "dialogue"
+},
+"16": {
+&"id": "16",
 &"mutation": {
 &"expression": Array[Dictionary]([{
 &"i": 3,
@@ -68,11 +101,11 @@ lines = {
 }]),
 &"is_blocking": true
 },
-&"next_id": "4",
+&"next_id": "17",
 &"type": "mutation"
 },
-"4": {
-&"id": "4",
+"17": {
+&"id": "17",
 &"mutation": {
 &"expression": Array[Dictionary]([{
 &"i": 3,
@@ -92,27 +125,96 @@ lines = {
 }]),
 &"is_blocking": true
 },
-&"next_id": "5",
+&"next_id": "18",
 &"type": "mutation"
 },
-"5": {
-&"id": "5",
+"18": {
+&"id": "18",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
 },
-"6": {
-&"id": "6",
+"19": {
+&"id": "19",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
 &"type": "goto"
+},
+"2": {
+&"character": "TIME",
+&"id": "2",
+&"next_id": "3",
+&"text": "I AM TIME ITSELF.",
+&"type": "dialogue"
+},
+"3": {
+&"character": "TIME",
+&"id": "3",
+&"next_id": "4",
+&"text": "AS YOU MAY HAVE NOTICED, THE FLOW OF TIME IS BEING PUT TO AN END THROUGHOUT THE WORLD.",
+&"type": "dialogue"
+},
+"4": {
+&"character": "TIME",
+&"id": "4",
+&"next_id": "5",
+&"text": "I AM LOSING MY GRASP OF IT, FOR EVEN A GOD IS SUBJECT TO ENTROPY, AND HIS MIND TO EROSION.",
+&"type": "dialogue"
+},
+"5": {
+&"character": "TIME",
+&"id": "5",
+&"next_id": "6",
+&"text": "I CHOSE AN HEIR TO REPLACE ME IN THE RULING OF TIME... BUT MY CHOICE CLEARLY DISPLEASED SOME OF MY OFFSPRING.",
+&"type": "dialogue"
+},
+"6": {
+&"character": "TIME",
+&"id": "6",
+&"next_id": "7",
+&"text": "UNFORTUNATELY, INTERVENING DIRECTLY IS FORBIDDEN BY THE LAWS OF GODHOOD.",
+&"type": "dialogue"
+},
+"7": {
+&"character": "TIME",
+&"id": "7",
+&"next_id": "8",
+&"text": "HENCE WHY I RAN THROUGH THE FABRIC OF TIME, SEEKING SOMEONE CAPABLE OF DOING IT IN MY STEAD.",
+&"type": "dialogue"
+},
+"8": {
+&"character": "TIME",
+&"id": "8",
+&"next_id": "9",
+&"text": "AND THAT IS WHY I SUMMONED YOU HERE.",
+&"type": "dialogue"
+},
+"9": {
+&"character": "TIME",
+&"id": "9",
+&"next_id": "10",
+&"text": "TAKE THIS.",
+&"type": "dialogue"
 }
 }
 raw_text = "~ start
 do PlayerStateManager.enter_cutscene()
-TIME: blabla
+TIME: I AM TIME ITSELF.
+TIME: AS YOU MAY HAVE NOTICED, THE FLOW OF TIME IS BEING PUT TO AN END THROUGHOUT THE WORLD.
+TIME: I AM LOSING MY GRASP OF IT, FOR EVEN A GOD IS SUBJECT TO ENTROPY, AND HIS MIND TO EROSION.
+TIME: I CHOSE AN HEIR TO REPLACE ME IN THE RULING OF TIME... BUT MY CHOICE CLEARLY DISPLEASED SOME OF MY OFFSPRING.
+TIME: UNFORTUNATELY, INTERVENING DIRECTLY IS FORBIDDEN BY THE LAWS OF GODHOOD.
+TIME: HENCE WHY I RAN THROUGH THE FABRIC OF TIME, SEEKING SOMEONE CAPABLE OF DOING IT IN MY STEAD.
+TIME: AND THAT IS WHY I SUMMONED YOU HERE.
+TIME: TAKE THIS.
+Martin: Sand ?
+TIME: A FRAGMENT OF MY DECAYING BODY. YOU CAN DRAW POWER FROM IT.
+TIME: YOU WILL INEVITABLY FIND MORE OF IT IN YOUR ATTEMPTS. BRING IT BACK TO ME AND I WILL MAKE YOU MORE POWERFUL.
+You received a fistful of sand. It immediately seems to sink into the pores of your hand.
+TIME: NOW GO. I WILL BRING YOU BACK HERE EVERYTIME YOU FAIL... UNTIL YOU DON'T.
+You can now dash using Shift (keyboard) or B (Xbox controller)
 do PlayerStateManager.leave_cutscene()
 do PlayerStateManager.unlock_dash()
 => END"

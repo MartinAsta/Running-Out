@@ -33,6 +33,7 @@ var can_initiate_dialogue:bool =false
 
 func _ready() -> void:
 	current_state = State.IDLE
+	GameManager.player_fell.connect(on_player_fell)
 
 func _physics_process(delta) -> void:
 	player_falling(delta)
@@ -239,3 +240,6 @@ func set_can_take_portal(b:bool) -> void:
 
 func set_can_initiate_dialogue(b:bool) -> void:
 	can_initiate_dialogue = b
+
+func on_player_fell() -> void:
+	global_position = GameManager.get_latest_checkpoint()

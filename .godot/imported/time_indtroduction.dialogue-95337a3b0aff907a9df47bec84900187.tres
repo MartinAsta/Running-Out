@@ -8,7 +8,7 @@ using_states = PackedStringArray()
 titles = {
 "start": "1"
 }
-character_names = PackedStringArray("TIME", "Martin")
+character_names = PackedStringArray("???", "Martin")
 first_title = "0"
 lines = {
 "0": {
@@ -17,7 +17,7 @@ lines = {
 &"type": "title"
 },
 "1": {
-&"character": "TIME",
+&"character": "???",
 &"id": "1",
 &"next_id": "2",
 &"text": "YOU.",
@@ -45,28 +45,28 @@ lines = {
 &"type": "dialogue"
 },
 "3": {
-&"character": "TIME",
+&"character": "???",
 &"id": "3",
 &"next_id": "4",
 &"text": "BE QUIET.",
 &"type": "dialogue"
 },
 "4": {
-&"character": "TIME",
+&"character": "???",
 &"id": "4",
 &"next_id": "5",
 &"text": "THIS WORLD IS RUNNING OUT OF TIME.",
 &"type": "dialogue"
 },
 "5": {
-&"character": "TIME",
+&"character": "???",
 &"id": "5",
 &"next_id": "6",
 &"text": "I HAVE LET ENTROPY RUN ITS COURSE FAR TOO LONG.",
 &"type": "dialogue"
 },
 "6": {
-&"character": "TIME",
+&"character": "???",
 &"id": "6",
 &"next_id": "7",
 &"text": "STEP THROUGH THIS PORTAL AND I SHALL EXPLAIN MYSELF FURTHER... ELSEWHERE.",
@@ -146,12 +146,12 @@ lines = {
 }
 }
 raw_text = "~ start
-TIME: YOU.
+???: YOU.
 Martin: Wha-!
-TIME: BE QUIET.
-TIME: THIS WORLD IS RUNNING OUT OF TIME.
-TIME: I HAVE LET ENTROPY RUN ITS COURSE FAR TOO LONG.
-TIME: STEP THROUGH THIS PORTAL AND I SHALL EXPLAIN MYSELF FURTHER... ELSEWHERE.
+???: BE QUIET.
+???: THIS WORLD IS RUNNING OUT OF TIME.
+???: I HAVE LET ENTROPY RUN ITS COURSE FAR TOO LONG.
+???: STEP THROUGH THIS PORTAL AND I SHALL EXPLAIN MYSELF FURTHER... ELSEWHERE.
 do PlayerStateManager.leave_cutscene()
 do TimeStateManager.on_tutorial_disappear()
 do GameManager.spawn_portal()

@@ -39,3 +39,7 @@ func on_tutorial_disappear() -> void:
 
 func start_dialogue() -> void:
 	trigger_dialogue.emit()
+
+func set_flag() -> void:
+	if !introduction_flag:
+		introduction_flag = true
