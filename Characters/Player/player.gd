@@ -2,12 +2,12 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var jump_height_variation_timer = $JumpHeightVariationTimer
-@onready var coyote_jump_timer = $CoyoteJumpTimer
-@onready var wall_jump_height_variation_timer = $WallJumpHeightVariationTimer
-@onready var coyote_walljump_timer = $CoyoteWalljumpTimer
-@onready var dash_cool_down_timer = $DashCoolDownTimer
-@onready var dash_duration_timer = $DashDurationTimer
+@onready var jump_height_variation_timer:Timer = $JumpHeightVariationTimer
+@onready var coyote_jump_timer:Timer = $CoyoteJumpTimer
+@onready var wall_jump_height_variation_timer:Timer = $WallJumpHeightVariationTimer
+@onready var coyote_walljump_timer:Timer = $CoyoteWalljumpTimer
+@onready var dash_cool_down_timer:Timer = $DashCoolDownTimer
+@onready var dash_duration_timer:Timer = $DashDurationTimer
 @onready var interaction_label = $InteractionLabel
 
 const GRAVITY:int = 900
