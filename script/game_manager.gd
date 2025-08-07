@@ -1,6 +1,7 @@
 extends Node
 
 var portal_scene = preload("res://Characters/NPC/Portal/portal.tscn")
+var balloon_scene = preload("res://Dialogue/tutorial_dialogue_balloon.tscn")
 
 var current_world:int
 var current_level:int
@@ -8,6 +9,8 @@ var latest_checkpoint:Vector2
 var remaining_time:float
 var is_in_resting_area:bool
 var has_crossed_finish_line:bool
+var is_in_shop:bool
+var has_lost:bool
 
 signal player_fell
 
@@ -18,17 +21,22 @@ func _ready() -> void:
 	remaining_time = 60
 	is_in_resting_area = false
 	has_crossed_finish_line = false
+	is_in_shop = false
+	has_lost = false
 
 func _process(delta):
-	print(PlayerStateManager.get_seconds_currency())
-	if has_crossed_finish_line:
+	if has_crossed_finish_line and remaining_time > 0:
 		remaining_time -= 0.5
+		PlayerStateManager.modify_seconds_currency_count(0.5)
 		return
 	if current_world < 1 or is_in_resting_area:
 		return
 	remaining_time -= delta
-	if remaining_time < 0:
-		game_over()
+	if remaining_time < 0 and !has_lost:
+		has_lost = true
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/game_over.dialogue"), "start")
 
 func spawn_portal() -> void:
 	var portal:Portal = portal_scene.instantiate()
@@ -47,6 +55,9 @@ func spawn_portal() -> void:
 
 func player_takes_portal() -> void:
 	if current_world == -1 and !TimeStateManager.introduction_flag:
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/ignoring_time.dialogue"), "start")
 		return
 	
 	if current_world == 0 and current_level == 0:
@@ -54,10 +65,20 @@ func player_takes_portal() -> void:
 		current_world = -1
 	elif current_world == -1:
 		get_tree().change_scene_to_file("res://levels/World1/W1_map1.tscn")
-		reset_timer()
+		start_run()
+		start_level()
 		current_world = 1
 		current_level = 1
+	elif current_world == 1:
+		get_tree().change_scene_to_file("res://levels/Peaceful_Levels/lobby.tscn")
+		current_world = -1
 	has_crossed_finish_line = false
+
+func start_run() -> void:
+	has_lost = false
+
+func start_level() -> void:
+	reset_timer()
 
 func player_falls() -> void:
 	player_fell.emit()
@@ -78,7 +99,6 @@ func set_latest_checkpoint(checkpoint:Vector2):
 
 func set_has_crossed_finish_line(b:bool) -> void:
 	has_crossed_finish_line = b
-	PlayerStateManager.modify_seconds_currency_count(remaining_time)
 
 func get_latest_checkpoint() -> Vector2:
 	return latest_checkpoint
@@ -94,3 +114,6 @@ func get_current_level() -> int:
 
 func get_is_in_resting_area() -> bool:
 	return is_in_resting_area
+
+func get_is_in_shop() -> bool:
+	return is_in_shop

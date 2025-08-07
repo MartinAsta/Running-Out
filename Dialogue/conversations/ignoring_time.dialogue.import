@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ce6xvnvfnjn3g"
+path="res://.godot/imported/ignoring_time.dialogue-2371265f47e09d0f8554fe0d1022968e.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/ignoring_time.dialogue"
+dest_files=["res://.godot/imported/ignoring_time.dialogue-2371265f47e09d0f8554fe0d1022968e.tres"]
+
+[params]
+
+defaults=true

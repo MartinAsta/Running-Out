@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://d23n8hoapqq87"]
+[gd_scene load_steps=10 format=4 uid="uid://d23n8hoapqq87"]
 
 [ext_resource type="PackedScene" uid="uid://taqarnefwhp3" path="res://scenes/test/W1_parallax_bg.tscn" id="1_mwt3h"]
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="2_ep35d"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b2uux8ix0myt" path="res://scenes/fall_detection_area_2d.tscn" id="5_dvlg1"]
 [ext_resource type="PackedScene" uid="uid://dd0ubona27lnr" path="res://scenes/checkpoint.tscn" id="6_vwny1"]
 [ext_resource type="PackedScene" uid="uid://0qvsu88bnkw1" path="res://Characters/NPC/Portal/portal.tscn" id="7_e174u"]
+[ext_resource type="PackedScene" uid="uid://vheivpe0r5np" path="res://scenes/ui/GameScreen.tscn" id="8_j1ul7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwny1"]
 size = Vector2(3199, 32)
@@ -43,3 +44,5 @@ position = Vector2(225, -145)
 
 [node name="Portal" parent="." instance=ExtResource("7_e174u")]
 position = Vector2(788, -35)
+
+[node name="GameScreen" parent="." instance=ExtResource("8_j1ul7")]

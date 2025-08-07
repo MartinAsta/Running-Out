@@ -1,6 +1,7 @@
+Label
+CanvasLayer
 CollisionShape2D
 Area2D
-Label
 Marker2D
 Node2D
 Camera2D
@@ -11,4 +12,3 @@ ParallaxLayer
 ParallaxBackground
 TileMapLayer
 CharacterBody2D
-CollisionPolygon2D

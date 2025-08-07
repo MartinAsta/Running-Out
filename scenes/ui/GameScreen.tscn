@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vheivpe0r5np"]
+
+[ext_resource type="PackedScene" uid="uid://cf8fxq1jeg21a" path="res://scenes/ui/wallet.tscn" id="1_5o1fi"]
+
+[node name="GameScreen" type="CanvasLayer"]
+
+[node name="Wallet" parent="." instance=ExtResource("1_5o1fi")]
+position = Vector2(249.5, 0)

@@ -1,0 +1,5 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+???: WE MUST SPEAK.
+do PlayerStateManager.leave_cutscene()
+=> END

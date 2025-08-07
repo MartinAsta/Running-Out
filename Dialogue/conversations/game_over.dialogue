@@ -1,0 +1,6 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: YOU RAN OUT OF TIME.
+do PlayerStateManager.leave_cutscene()
+do GameManager.game_over()
+=> END

@@ -22,5 +22,5 @@ func leave_cutscene() -> void:
 func modify_seconds_currency_count(seconds:float) -> void:
 	seconds_currency += seconds
 
-func get_seconds_currency() -> int:
-	return int(seconds_currency)
+func get_seconds_currency() -> String:
+	return str(int(seconds_currency))

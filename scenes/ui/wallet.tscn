@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf8fxq1jeg21a"]
+
+[ext_resource type="Script" uid="uid://be2oebejbg1pr" path="res://scenes/ui/wallet.gd" id="1_51v4g"]
+
+[node name="Wallet" type="Node2D"]
+script = ExtResource("1_51v4g")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 10
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 117.0
+offset_bottom = 38.0
+text = "I"
+horizontal_alignment = 1
