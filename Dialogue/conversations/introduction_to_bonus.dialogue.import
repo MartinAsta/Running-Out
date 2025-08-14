@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://crgujlxxr4t1v"
+path="res://.godot/imported/introduction_to_bonus.dialogue-94255f6d9ca27849d08db0ab5b9fe3cf.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/introduction_to_bonus.dialogue"
+dest_files=["res://.godot/imported/introduction_to_bonus.dialogue-94255f6d9ca27849d08db0ab5b9fe3cf.tres"]
+
+[params]
+
+defaults=true

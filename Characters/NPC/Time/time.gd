@@ -32,8 +32,20 @@ func _on_interaction_area_2d_body_exited(body):
 		player.set_can_initiate_dialogue(false)
 
 func on_trigger_dialogue() -> void:
+	if GameManager.get_is_in_shop():
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/shop.dialogue"), "start")
+		return
 	if !TimeStateManager.introduction_flag:
 		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
 		get_tree().current_scene.add_child(balloon)
 		balloon.start(load("res://Dialogue/conversations/lobby_introduction.dialogue"), "start")
 		TimeStateManager.set_flag()
+	elif GameManager.get_first_loss_flag() and !TimeStateManager.get_introduction_to_bonus_flag():
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/introduction_to_bonus.dialogue"), "start")
+		TimeStateManager.set_flag()
+	elif !GameManager.get_first_win_flag() and GameManager.get_first_loss_flag():
+		TimeStateManager.start_upgrade_dialogue()

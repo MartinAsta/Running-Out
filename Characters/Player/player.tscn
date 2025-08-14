@@ -377,7 +377,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xf5fp"]
-height = 32.0
+radius = 8.0
+height = 24.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -391,7 +392,7 @@ animation = &"dash"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_xf5fp")
 
 [node name="JumpHeightVariationTimer" type="Timer" parent="."]
@@ -408,10 +409,6 @@ one_shot = true
 
 [node name="CoyoteWalljumpTimer" type="Timer" parent="."]
 wait_time = 0.1
-one_shot = true
-
-[node name="DashCoolDownTimer" type="Timer" parent="."]
-wait_time = 2.5
 one_shot = true
 
 [node name="DashDurationTimer" type="Timer" parent="."]
@@ -443,5 +440,4 @@ position = Vector2(0, -83)
 
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
-[connection signal="timeout" from="DashCoolDownTimer" to="." method="_on_dash_cool_down_timer_timeout"]
 [connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]

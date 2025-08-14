@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4kq2gmqj2qbo"]
+
+[ext_resource type="Shader" uid="uid://b6t1fygikxc6h" path="res://Characters/Player/dash_after_image.gdshader" id="1_7sju0"]
+[ext_resource type="Script" uid="uid://dgqxydpv4rtbq" path="res://Characters/Player/dash_after_image.gd" id="1_svpw1"]
+[ext_resource type="Texture2D" uid="uid://bjykfso2edfvd" path="res://Characters/Player/RUN.png" id="2_svpw1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ewn2x"]
+shader = ExtResource("1_7sju0")
+
+[node name="DashAfterImageRight" type="CharacterBody2D"]
+script = ExtResource("1_svpw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ewn2x")
+position = Vector2(0, -17)
+texture = ExtResource("2_svpw1")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(96, 54, 26, 34)

@@ -1,0 +1,42 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
+- Yes
+	TIME: WHAT DO YOU WANT TO UPGRADE ?
+	- My speed
+		TIME: I WILL NEED {{GameManager.get_upgrade_cost("speed_cost")}} GRAINS OF SAND TO MAKE YOU FASTER.
+		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("speed_cost"):
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			- Yes
+				TIME: SO BE IT. YOU ARE NOW 1% FASTER.
+				do TimeStateManager.speed_upgrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				TIME: AS YOU WISH
+				do PlayerStateManager.leave_cutscene()
+				=> END
+	- My dash
+		TIME: I WILL NEED {{GameManager.get_upgrade_cost("dash_cooldown_cost")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.
+		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("dash_cooldown_cost"):
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			- Yes
+				TIME: SO BE IT. YOUR DASH ABILITY NOW RECOVERS FASTER.
+				do TimeStateManager.dash_cooldown_upgrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				TIME: AS YOU WISH
+				do PlayerStateManager.leave_cutscene()
+				=> END
+- No
+	do PlayerStateManager.leave_cutscene()
+	=> END
+do PlayerStateManager.leave_cutscene()
+=> END

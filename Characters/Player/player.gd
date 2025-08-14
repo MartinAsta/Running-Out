@@ -6,12 +6,15 @@ extends CharacterBody2D
 @onready var coyote_jump_timer:Timer = $CoyoteJumpTimer
 @onready var wall_jump_height_variation_timer:Timer = $WallJumpHeightVariationTimer
 @onready var coyote_walljump_timer:Timer = $CoyoteWalljumpTimer
-@onready var dash_cool_down_timer:Timer = $DashCoolDownTimer
 @onready var dash_duration_timer:Timer = $DashDurationTimer
 @onready var interaction_label = $InteractionLabel
 
+var dash_after_image_right = preload("res://Characters/Player/dash_after_image_right.tscn")
+var dash_after_image_left = preload("res://Characters/Player/dash_after_image_left.tscn")
+
 const GRAVITY:int = 900
-const SPEED:int = 10000
+const NORMAL_SPEED = 10000
+var SPEED:float
 const JUMP_HEIGHT:int = 14000
 const DASH_SPEED_X:int = 13000
 const DASH_SPEED_Y:int = 10000
@@ -19,23 +22,23 @@ const DASH_SPEED_Y:int = 10000
 enum State {IDLE, RUN, JUMP, FALL, WALL, WALLWALK, DASH}
 
 var current_state:State
-var is_facing_right:bool = true
 var last_wall_grabbed_on_right:bool
 var can_go_higher:bool
 var can_go_higher_wall:bool
 var was_on_floor:bool
 var was_on_wall:bool
-var can_dash:bool = true
 var is_dashing:bool = false
 var dash_direction:Vector2
 var can_take_portal:bool = false
-var can_initiate_dialogue:bool =false
+var can_take_shop_portal:bool = false
+var can_initiate_dialogue:bool = false
 
 func _ready() -> void:
 	current_state = State.IDLE
-	GameManager.player_fell.connect(on_player_fell)
+	GameManager.player_takes_damage.connect(on_player_takes_damage)
 
 func _physics_process(delta) -> void:
+	SPEED = NORMAL_SPEED * PlayerStateManager.player_speed_multiplicator
 	player_falling(delta)
 	player_idle()
 	if !PlayerStateManager.is_in_cutscene:
@@ -45,6 +48,7 @@ func _physics_process(delta) -> void:
 		player_wall_jump(delta)
 		player_dash(delta)
 		take_portal()
+		take_shop_portal()
 		initiate_dialogue()
 	else:
 		velocity.x = 0
@@ -58,6 +62,7 @@ func _physics_process(delta) -> void:
 	if !is_on_wall() and was_on_wall and velocity.y >= 0:
 		coyote_walljump_timer.start()
 	player_animation()
+	PlayerStateManager.set_position(global_position)
 
 func player_falling(delta) -> void:
 	if is_dashing:
@@ -78,11 +83,11 @@ func player_run(delta) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
 	
 	if direction != 0 or !wall_jump_height_variation_timer.is_stopped():
-		if direction > 0 && !is_facing_right :
-			is_facing_right = !is_facing_right
-		elif direction < 0 && is_facing_right :
-			is_facing_right = !is_facing_right
-		animated_sprite_2d.flip_h = true if !is_facing_right else false
+		if direction > 0 && !PlayerStateManager.get_is_facing_right() :
+			PlayerStateManager.set_is_facing_right(!PlayerStateManager.get_is_facing_right())
+		elif direction < 0 && PlayerStateManager.get_is_facing_right() :
+			PlayerStateManager.set_is_facing_right(!PlayerStateManager.get_is_facing_right())
+		animated_sprite_2d.flip_h = true if !PlayerStateManager.get_is_facing_right() else false
 		if is_on_floor():
 			current_state = State.RUN
 		if(!wall_jump_height_variation_timer.is_stopped()):
@@ -92,7 +97,7 @@ func player_run(delta) -> void:
 			velocity.x = clamp(velocity.x, -(direction * SPEED * delta), direction * SPEED * delta)
 		if is_on_wall() and is_on_floor():
 			current_state = State.WALLWALK
-			last_wall_grabbed_on_right = is_facing_right
+			last_wall_grabbed_on_right = PlayerStateManager.get_is_facing_right()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -146,7 +151,7 @@ func player_wall_jump(delta) -> void:
 			velocity.y -= JUMP_HEIGHT/22 * delta
 
 func player_dash(delta) -> void:
-	if (!can_dash and !is_dashing) or !PlayerStateManager.has_unlocked_dash:
+	if (!PlayerStateManager.get_can_dash() and !is_dashing) or !PlayerStateManager.has_unlocked_dash:
 		return
 	if is_dashing:
 		if dash_direction.x != 0 and dash_direction.y != 0:
@@ -173,15 +178,16 @@ func player_dash(delta) -> void:
 			dash_direction = Vector2(1,0)
 		elif Input.is_action_pressed("move_left"):
 			dash_direction = Vector2(-1,0)
-		elif is_facing_right:
+		elif PlayerStateManager.get_is_facing_right():
 			dash_direction = Vector2(1,0)
-		elif !is_facing_right:
+		elif !PlayerStateManager.get_is_facing_right():
 			dash_direction = Vector2(-1,0)
+		var after_image = dash_after_image_right.instantiate() if PlayerStateManager.get_is_facing_right() else dash_after_image_left.instantiate()
+		get_tree().current_scene.add_child(after_image)
+		after_image.global_position = global_position
 		velocity.x = dash_direction.x * DASH_SPEED_X * delta if dash_direction.y == 0 else (dash_direction.x * DASH_SPEED_X * delta)*0.8
 		velocity.y = dash_direction.y * DASH_SPEED_Y * delta if dash_direction.x == 0 else (dash_direction.y * DASH_SPEED_Y * delta)*0.8
-		can_dash = false
 		is_dashing = true
-		dash_cool_down_timer.start()
 		dash_duration_timer.start()
 		current_state = State.DASH
 
@@ -190,6 +196,12 @@ func take_portal() -> void:
 		return
 	if Input.is_action_just_pressed("interact"):
 		GameManager.player_takes_portal()
+
+func take_shop_portal() -> void:
+	if !can_take_shop_portal:
+		return
+	if Input.is_action_just_pressed("interact"):
+		GameManager.player_takes_shop_portal()
 
 func initiate_dialogue() -> void:
 	if !can_initiate_dialogue:
@@ -219,9 +231,6 @@ func _on_jump_height_variation_timer_timeout() -> void:
 func _on_wall_jump_height_variation_timer_timeout() -> void:
 	can_go_higher_wall = false
 
-func _on_dash_cool_down_timer_timeout():
-	can_dash = true
-
 func _on_dash_duration_timer_timeout():
 	is_dashing = false
 	dash_direction = Vector2(0,0)
@@ -238,8 +247,11 @@ func disable_interaction_label() -> void:
 func set_can_take_portal(b:bool) -> void:
 	can_take_portal = b
 
+func set_can_take_shop_portal(b:bool) -> void:
+	can_take_shop_portal = b
+
 func set_can_initiate_dialogue(b:bool) -> void:
 	can_initiate_dialogue = b
 
-func on_player_fell() -> void:
+func on_player_takes_damage() -> void:
 	global_position = GameManager.get_latest_checkpoint()

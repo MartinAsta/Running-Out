@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bucyau4qf11w8"
+path="res://.godot/imported/upgrade_player.dialogue-72f7e9a2f6b3f18b2a90e78dab7d6d6a.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/upgrade_player.dialogue"
+dest_files=["res://.godot/imported/upgrade_player.dialogue-72f7e9a2f6b3f18b2a90e78dab7d6d6a.tres"]
+
+[params]
+
+defaults=true

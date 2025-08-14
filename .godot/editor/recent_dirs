@@ -1,9 +1,10 @@
+res://Characters/Player
+res://assets
 res://scenes/ui
 res://scenes
 res://Characters/NPC/Portal
 res://Characters/NPC/Time
 res://script
-res://Characters/Player
 res://Tilesets
 res://levels/World0
 res://levels/test_levels

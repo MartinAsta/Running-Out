@@ -1,0 +1,19 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: I SEE YOU STARTED GATHERING SAND AS I SUGGESTED.
+TIME: WE CAN USE IT TO MAKE YOU STRONGER, FASTER, INCREASE THE POTENCY OF YOUR ABILITIES.
+TIME: DO YOU UNDERSTAND ?
+- Yes
+	do PlayerStateManager.leave_cutscene()
+	do TimeStateManager.start_upgrade_dialogue()
+	=> END
+- How do I get sand ?
+	TIME: AS I SAID, YOU WILL INEVITABLY GATHER SOME OF IT AS YOU GO.
+	TIME: EACH GRAIN IS A TINY FRACTION OF MY BODY, WORN AWAY AS EONS PASSED.
+	TIME: THEY WANDER THE WORLD, DRAWN TO ME... WAITING.
+	TIME: YOU BEAR A FRAGMENT OF MYSELF — HENCE WHY THEY WILL CLING TO YOU.
+	do PlayerStateManager.leave_cutscene()
+	do TimeStateManager.start_upgrade_dialogue()
+	=> END
+do PlayerStateManager.leave_cutscene()
+=> END

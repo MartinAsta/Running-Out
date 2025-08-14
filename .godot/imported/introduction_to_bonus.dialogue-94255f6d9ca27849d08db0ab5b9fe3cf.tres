@@ -1,0 +1,273 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_iyap1"]
+
+[resource]
+script = ExtResource("1_iyap1")
+using_states = PackedStringArray()
+titles = {
+"start": "1"
+}
+character_names = PackedStringArray("TIME")
+first_title = "0"
+lines = {
+"0": {
+&"id": "0",
+&"next_id": "1",
+&"type": "title"
+},
+"1": {
+&"id": "1",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "enter_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "2",
+&"type": "mutation"
+},
+"10": {
+&"character": "TIME",
+&"id": "10",
+&"next_id": "11",
+&"text": "AS I SAID, YOU WILL INEVITABLY GATHER SOME OF IT AS YOU GO.",
+&"type": "dialogue"
+},
+"11": {
+&"character": "TIME",
+&"id": "11",
+&"next_id": "12",
+&"text": "EACH GRAIN IS A TINY FRACTION OF MY BODY, WORN AWAY AS EONS PASSED.",
+&"type": "dialogue"
+},
+"12": {
+&"character": "TIME",
+&"id": "12",
+&"next_id": "13",
+&"text": "THEY WANDER THE WORLD, DRAWN TO ME... WAITING.",
+&"type": "dialogue"
+},
+"13": {
+&"character": "TIME",
+&"id": "13",
+&"next_id": "14",
+&"text": "YOU BEAR A FRAGMENT OF MYSELF — HENCE WHY THEY WILL CLING TO YOU.",
+&"type": "dialogue"
+},
+"14": {
+&"id": "14",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "15",
+&"type": "mutation"
+},
+"15": {
+&"id": "15",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "TimeStateManager"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "start_upgrade_dialogue",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 43,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "16",
+&"type": "mutation"
+},
+"16": {
+&"id": "16",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"17": {
+&"id": "17",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "18",
+&"type": "mutation"
+},
+"18": {
+&"id": "18",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"19": {
+&"id": "19",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"2": {
+&"character": "TIME",
+&"id": "2",
+&"next_id": "3",
+&"text": "I SEE YOU STARTED GATHERING SAND AS I SUGGESTED.",
+&"type": "dialogue"
+},
+"3": {
+&"character": "TIME",
+&"id": "3",
+&"next_id": "4",
+&"text": "WE CAN USE IT TO MAKE YOU STRONGER, FASTER, INCREASE THE POTENCY OF YOUR ABILITIES.",
+&"type": "dialogue"
+},
+"4": {
+&"character": "TIME",
+&"id": "4",
+&"next_id": "5",
+&"text": "DO YOU UNDERSTAND ?",
+&"type": "dialogue"
+},
+"5": {
+&"id": "5",
+&"next_id": "6",
+&"responses": PackedStringArray("5", "9"),
+&"text": "Yes",
+&"type": "response"
+},
+"6": {
+&"id": "6",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "7",
+&"type": "mutation"
+},
+"7": {
+&"id": "7",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "TimeStateManager"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "start_upgrade_dialogue",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 43,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "8",
+&"type": "mutation"
+},
+"8": {
+&"id": "8",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"9": {
+&"id": "9",
+&"next_id": "10",
+&"text": "How do I get sand ?",
+&"type": "response"
+}
+}
+raw_text = "~ start
+do PlayerStateManager.enter_cutscene()
+TIME: I SEE YOU STARTED GATHERING SAND AS I SUGGESTED.
+TIME: WE CAN USE IT TO MAKE YOU STRONGER, FASTER, INCREASE THE POTENCY OF YOUR ABILITIES.
+TIME: DO YOU UNDERSTAND ?
+- Yes
+	do PlayerStateManager.leave_cutscene()
+	do TimeStateManager.start_upgrade_dialogue()
+	=> END
+- How do I get sand ?
+	TIME: AS I SAID, YOU WILL INEVITABLY GATHER SOME OF IT AS YOU GO.
+	TIME: EACH GRAIN IS A TINY FRACTION OF MY BODY, WORN AWAY AS EONS PASSED.
+	TIME: THEY WANDER THE WORLD, DRAWN TO ME... WAITING.
+	TIME: YOU BEAR A FRAGMENT OF MYSELF — HENCE WHY THEY WILL CLING TO YOU.
+	do PlayerStateManager.leave_cutscene()
+	do TimeStateManager.start_upgrade_dialogue()
+	=> END
+do PlayerStateManager.leave_cutscene()
+=> END"
+metadata/dialogue_manager_version = "3.7.1"

@@ -330,7 +330,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7ktt"]
-size = Vector2(82, 293)
+size = Vector2(82, 301.5)
 
 [node name="Time" type="Node2D" groups=["TimeNPC"]]
 script = ExtResource("1_jcc5n")
@@ -348,7 +348,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
-position = Vector2(0, -151)
+position = Vector2(0, -146.75)
 shape = SubResource("RectangleShape2D_o7ktt")
 
 [connection signal="body_entered" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_entered"]

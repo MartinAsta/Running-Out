@@ -70,6 +70,7 @@ func _init(data: Dictionary = {}) -> void:
 				character_replacements = data.get("character_replacements", [] as Array[Dictionary])
 				text = data.text
 				text_replacements = data.get("text_replacements", [] as Array[Dictionary])
+				text_replacements.append({"key": "{test}","value": "ok"})
 				translation_key = data.get("translation_key", data.text)
 				pauses = data.get("pauses", {})
 				speeds = data.get("speeds", {})

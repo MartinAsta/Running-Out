@@ -2,7 +2,10 @@ class_name TimeManager
 extends Node
 
 var time_npc_scene = preload("res://Characters/NPC/Time/time.tscn")
+var balloon_scene = preload("res://Dialogue/tutorial_dialogue_balloon.tscn")
+
 var introduction_flag:bool
+var introduction_to_bonus_flag:bool
 
 signal tutorial_appearance()
 signal trigger_dialogue()
@@ -10,6 +13,7 @@ signal trigger_dialogue()
 func _ready() -> void:
 	connect("tutorial_appearance", on_tutorial_appear)
 	introduction_flag = false
+	introduction_to_bonus_flag = false
 
 func tutorial_appear() -> void:
 	tutorial_appearance.emit()
@@ -40,6 +44,29 @@ func on_tutorial_disappear() -> void:
 func start_dialogue() -> void:
 	trigger_dialogue.emit()
 
+func start_upgrade_dialogue() -> void:
+	var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+	get_tree().current_scene.add_child(balloon)
+	balloon.start(load("res://Dialogue/conversations/upgrade_player.dialogue"), "start")
+
+func speed_upgrade() -> void:
+	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("speed_cost")))
+	GameManager.increase_upgrade_cost("speed_cost")
+	PlayerStateManager.increase_speed()
+
+func dash_cooldown_upgrade() -> void:
+	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("dash_cooldown_cost")))
+	GameManager.increase_upgrade_cost("dash_cooldown_cost")
+	PlayerStateManager.decrease_dash_cooldown()
+
 func set_flag() -> void:
 	if !introduction_flag:
 		introduction_flag = true
+	elif !introduction_to_bonus_flag:
+		introduction_to_bonus_flag = true
+
+func get_introduction_flag() -> bool:
+	return introduction_flag
+
+func get_introduction_to_bonus_flag() -> bool:
+	return introduction_to_bonus_flag

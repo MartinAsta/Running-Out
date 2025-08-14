@@ -1,0 +1,667 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_hflnm"]
+
+[resource]
+script = ExtResource("1_hflnm")
+using_states = PackedStringArray()
+titles = {
+"start": "1"
+}
+character_names = PackedStringArray("TIME")
+first_title = "0"
+lines = {
+"0": {
+&"id": "0",
+&"next_id": "1",
+&"type": "title"
+},
+"1": {
+&"id": "1",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "enter_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "2",
+&"type": "mutation"
+},
+"10": {
+&"id": "10",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"11": {
+&"condition": {},
+&"id": "11",
+&"next_id": "12",
+&"next_id_after": "40",
+&"type": "condition"
+},
+"12": {
+&"id": "12",
+&"next_id": "13",
+&"responses": PackedStringArray("12", "17"),
+&"text": "Yes",
+&"type": "response"
+},
+"13": {
+&"character": "TIME",
+&"id": "13",
+&"next_id": "14",
+&"text": "SO BE IT. YOU ARE NOW 1% FASTER.",
+&"type": "dialogue"
+},
+"14": {
+&"id": "14",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "TimeStateManager"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "speed_upgrade",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 34,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "15",
+&"type": "mutation"
+},
+"15": {
+&"id": "15",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "16",
+&"type": "mutation"
+},
+"16": {
+&"id": "16",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"17": {
+&"id": "17",
+&"next_id": "18",
+&"text": "No",
+&"type": "response"
+},
+"18": {
+&"character": "TIME",
+&"id": "18",
+&"next_id": "19",
+&"text": "AS YOU WISH",
+&"type": "dialogue"
+},
+"19": {
+&"id": "19",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "20",
+&"type": "mutation"
+},
+"2": {
+&"character": "TIME",
+&"id": "2",
+&"next_id": "3",
+&"text": "DO YOU WISH TO SPEND SOME OF YOUR SAND ?",
+&"type": "dialogue"
+},
+"20": {
+&"id": "20",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"21": {
+&"id": "21",
+&"next_id": "22",
+&"text": "My dash",
+&"type": "response"
+},
+"22": {
+&"character": "TIME",
+&"id": "22",
+&"next_id": "23",
+&"text": "I WILL NEED {{GameManager.get_upgrade_cost(\"dash_cooldown_cost\")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.",
+&"text_replacements": Array[Dictionary]([{
+&"expression": Array[Dictionary]([{
+&"i": 22,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 33,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 34,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 51,
+&"type": &"string",
+&"value": "dash_cooldown_cost"
+}, {
+&"i": 71,
+&"type": &"parens_close"
+}])])
+}]),
+&"value_in_text": "{{GameManager.get_upgrade_cost(\"dash_cooldown_cost\")}}"
+}]),
+&"type": "dialogue"
+},
+"23": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 23,
+&"type": &"dot"
+}, {
+&"function": "get_sand",
+&"i": 24,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 33,
+&"type": &"parens_close"
+}])])
+}, {
+&"i": 35,
+&"type": &"comparison",
+&"value": "<"
+}, {
+&"i": 37,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 48,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 49,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 66,
+&"type": &"string",
+&"value": "dash_cooldown_cost"
+}, {
+&"i": 86,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "23",
+&"next_id": "24",
+&"next_id_after": "40",
+&"next_sibling_id": "27",
+&"type": "condition"
+},
+"24": {
+&"id": "24",
+&"next_id": "25",
+&"responses": PackedStringArray("24"),
+&"text": "I don't have enough sand...",
+&"type": "response"
+},
+"25": {
+&"id": "25",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "26",
+&"type": "mutation"
+},
+"26": {
+&"id": "26",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"27": {
+&"condition": {},
+&"id": "27",
+&"next_id": "28",
+&"next_id_after": "40",
+&"type": "condition"
+},
+"28": {
+&"id": "28",
+&"next_id": "29",
+&"responses": PackedStringArray("28", "33"),
+&"text": "Yes",
+&"type": "response"
+},
+"29": {
+&"character": "TIME",
+&"id": "29",
+&"next_id": "30",
+&"text": "SO BE IT. YOUR DASH ABILITY NOW RECOVERS FASTER.",
+&"type": "dialogue"
+},
+"3": {
+&"id": "3",
+&"next_id": "4",
+&"responses": PackedStringArray("3", "37"),
+&"text": "Yes",
+&"type": "response"
+},
+"30": {
+&"id": "30",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "TimeStateManager"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "dash_cooldown_upgrade",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 42,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "31",
+&"type": "mutation"
+},
+"31": {
+&"id": "31",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "32",
+&"type": "mutation"
+},
+"32": {
+&"id": "32",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"33": {
+&"id": "33",
+&"next_id": "34",
+&"text": "No",
+&"type": "response"
+},
+"34": {
+&"character": "TIME",
+&"id": "34",
+&"next_id": "35",
+&"text": "AS YOU WISH",
+&"type": "dialogue"
+},
+"35": {
+&"id": "35",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "36",
+&"type": "mutation"
+},
+"36": {
+&"id": "36",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"37": {
+&"id": "37",
+&"next_id": "38",
+&"text": "No",
+&"type": "response"
+},
+"38": {
+&"id": "38",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "39",
+&"type": "mutation"
+},
+"39": {
+&"id": "39",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"4": {
+&"character": "TIME",
+&"id": "4",
+&"next_id": "5",
+&"text": "WHAT DO YOU WANT TO UPGRADE ?",
+&"type": "dialogue"
+},
+"40": {
+&"id": "40",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "41",
+&"type": "mutation"
+},
+"41": {
+&"id": "41",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"42": {
+&"id": "42",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"5": {
+&"id": "5",
+&"next_id": "6",
+&"responses": PackedStringArray("5", "21"),
+&"text": "My speed",
+&"type": "response"
+},
+"6": {
+&"character": "TIME",
+&"id": "6",
+&"next_id": "7",
+&"text": "I WILL NEED {{GameManager.get_upgrade_cost(\"speed_cost\")}} GRAINS OF SAND TO MAKE YOU FASTER.",
+&"text_replacements": Array[Dictionary]([{
+&"expression": Array[Dictionary]([{
+&"i": 22,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 33,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 34,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 51,
+&"type": &"string",
+&"value": "speed_cost"
+}, {
+&"i": 63,
+&"type": &"parens_close"
+}])])
+}]),
+&"value_in_text": "{{GameManager.get_upgrade_cost(\"speed_cost\")}}"
+}]),
+&"type": "dialogue"
+},
+"7": {
+&"condition": {
+&"expression": Array[Dictionary]([{
+&"i": 5,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 23,
+&"type": &"dot"
+}, {
+&"function": "get_sand",
+&"i": 24,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 33,
+&"type": &"parens_close"
+}])])
+}, {
+&"i": 35,
+&"type": &"comparison",
+&"value": "<"
+}, {
+&"i": 37,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 48,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 49,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 66,
+&"type": &"string",
+&"value": "speed_cost"
+}, {
+&"i": 78,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "7",
+&"next_id": "8",
+&"next_id_after": "40",
+&"next_sibling_id": "11",
+&"type": "condition"
+},
+"8": {
+&"id": "8",
+&"next_id": "9",
+&"responses": PackedStringArray("8"),
+&"text": "I don't have enough sand...",
+&"type": "response"
+},
+"9": {
+&"id": "9",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "10",
+&"type": "mutation"
+}
+}
+raw_text = "~ start
+do PlayerStateManager.enter_cutscene()
+TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
+- Yes
+	TIME: WHAT DO YOU WANT TO UPGRADE ?
+	- My speed
+		TIME: I WILL NEED {{GameManager.get_upgrade_cost(\"speed_cost\")}} GRAINS OF SAND TO MAKE YOU FASTER.
+		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost(\"speed_cost\"):
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			- Yes
+				TIME: SO BE IT. YOU ARE NOW 1% FASTER.
+				do TimeStateManager.speed_upgrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				TIME: AS YOU WISH
+				do PlayerStateManager.leave_cutscene()
+				=> END
+	- My dash
+		TIME: I WILL NEED {{GameManager.get_upgrade_cost(\"dash_cooldown_cost\")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.
+		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost(\"dash_cooldown_cost\"):
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			- Yes
+				TIME: SO BE IT. YOUR DASH ABILITY NOW RECOVERS FASTER.
+				do TimeStateManager.dash_cooldown_upgrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				TIME: AS YOU WISH
+				do PlayerStateManager.leave_cutscene()
+				=> END
+- No
+	do PlayerStateManager.leave_cutscene()
+	=> END
+do PlayerStateManager.leave_cutscene()
+=> END"
+metadata/dialogue_manager_version = "3.7.1"
