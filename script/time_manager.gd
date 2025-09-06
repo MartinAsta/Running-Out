@@ -20,14 +20,8 @@ func tutorial_appear() -> void:
 
 func on_tutorial_appear() -> void:
 	var npc:TimeNpc = time_npc_scene.instantiate()
-	var player:Player
-	var player_position:Vector2
+	var player_position:Vector2 = PlayerStateManager.get_player_position()
 	var scene = get_tree().get_current_scene()
-	
-	for node in scene.get_children():
-		if node.is_in_group("Player"):
-			player = node
-			player_position = player.position
 			
 	scene.add_child(npc)
 	npc.global_position = player_position
@@ -51,13 +45,18 @@ func start_upgrade_dialogue() -> void:
 
 func speed_upgrade() -> void:
 	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("speed_cost")))
-	GameManager.increase_upgrade_cost("speed_cost")
+	GameManager.increase_speed_upgrade_cost()
 	PlayerStateManager.increase_speed()
 
 func dash_cooldown_upgrade() -> void:
 	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("dash_cooldown_cost")))
-	GameManager.increase_upgrade_cost("dash_cooldown_cost")
+	GameManager.increase_dash_cooldown_upgrade_cost()
 	PlayerStateManager.decrease_dash_cooldown()
+
+func bonus_time_upgrade() -> void:
+	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("bonus_time_cost")))
+	GameManager.increase_bonus_time_upgrade_cost()
+	PlayerStateManager.increase_bonus_time()
 
 func set_flag() -> void:
 	if !introduction_flag:

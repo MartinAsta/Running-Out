@@ -392,6 +392,7 @@ animation = &"dash"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_xf5fp")
 
@@ -420,6 +421,7 @@ collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_xf5fp")
 
@@ -438,6 +440,10 @@ horizontal_alignment = 1
 [node name="TimeLeft" parent="." instance=ExtResource("8_klx3t")]
 position = Vector2(0, -83)
 
+[node name="LostTimeCDTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="WallJumpHeightVariationTimer" to="." method="_on_wall_jump_height_variation_timer_timeout"]
 [connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="LostTimeCDTimer" to="." method="_on_lost_time_cd_timer_timeout"]

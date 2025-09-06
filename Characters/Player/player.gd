@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var coyote_walljump_timer:Timer = $CoyoteWalljumpTimer
 @onready var dash_duration_timer:Timer = $DashDurationTimer
 @onready var interaction_label = $InteractionLabel
+@onready var lost_time_cd_timer = $LostTimeCDTimer
 
 var dash_after_image_right = preload("res://Characters/Player/dash_after_image_right.tscn")
 var dash_after_image_left = preload("res://Characters/Player/dash_after_image_left.tscn")
@@ -32,10 +33,12 @@ var dash_direction:Vector2
 var can_take_portal:bool = false
 var can_take_shop_portal:bool = false
 var can_initiate_dialogue:bool = false
+var can_take_damage:bool
 
 func _ready() -> void:
 	current_state = State.IDLE
 	GameManager.player_takes_damage.connect(on_player_takes_damage)
+	can_take_damage = true
 
 func _physics_process(delta) -> void:
 	SPEED = NORMAL_SPEED * PlayerStateManager.player_speed_multiplicator
@@ -254,4 +257,12 @@ func set_can_initiate_dialogue(b:bool) -> void:
 	can_initiate_dialogue = b
 
 func on_player_takes_damage() -> void:
-	global_position = GameManager.get_latest_checkpoint()
+	if can_take_damage:
+		global_position = GameManager.get_latest_checkpoint()
+		GameManager.deduce_time()
+		is_dashing = false
+		lost_time_cd_timer.start()
+		can_take_damage = false
+
+func _on_lost_time_cd_timer_timeout():
+	can_take_damage = true

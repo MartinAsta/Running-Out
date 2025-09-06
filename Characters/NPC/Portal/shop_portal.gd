@@ -7,7 +7,7 @@ func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var portal_appear = rng.randi_range(1, 100)
-	if portal_appear <= GameManager.get_shop_odds():
+	if portal_appear <= GameManager.get_shop_odds() or GameManager.get_current_level() == 10:
 		GameManager.reset_shop_odds()
 		visible = true
 		collision_shape_2d.disabled = false

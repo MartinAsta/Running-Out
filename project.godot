@@ -20,6 +20,7 @@ GameManager="*res://script/game_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PlayerStateManager="*res://script/player_manager.gd"
 TimeStateManager="*res://script/time_manager.gd"
+SaveManager="*res://script/save_manager.gd"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bx4wie50g8ftt"]
+[gd_scene load_steps=11 format=4 uid="uid://bx4wie50g8ftt"]
 
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="1_g06vr"]
 [ext_resource type="PackedScene" uid="uid://cl1tpxtm2dgyh" path="res://Characters/Player/player.tscn" id="2_fiq4n"]
@@ -6,12 +6,16 @@
 [ext_resource type="Script" uid="uid://btnvq8c5lv7wk" path="res://levels/World0/tutorial_cutscene_trigger.gd" id="4_fh7wt"]
 [ext_resource type="PackedScene" uid="uid://dd0ubona27lnr" path="res://scenes/checkpoint.tscn" id="5_5318i"]
 [ext_resource type="PackedScene" uid="uid://b2uux8ix0myt" path="res://scenes/fall_detection_area_2d.tscn" id="6_dj5xc"]
+[ext_resource type="PackedScene" uid="uid://c0svkw0eemfqd" path="res://scenes/ui/tuto_label.tscn" id="7_dj5xc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpupe"]
 size = Vector2(33.5, 385)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh4to"]
 size = Vector2(264, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dj5xc"]
+size = Vector2(339, 350)
 
 [node name="W0Map1" type="Node2D" groups=["World"]]
 
@@ -54,5 +58,23 @@ position = Vector2(2763, 31)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallDetectionArea2D"]
 position = Vector2(4, 92)
 shape = SubResource("RectangleShape2D_eh4to")
+
+[node name="Tuto" type="Node" parent="."]
+
+[node name="TutoLabel" parent="Tuto" instance=ExtResource("7_dj5xc")]
+position = Vector2(230, -149)
+tuto_text = "Press Space or \"A\" to jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tuto/TutoLabel"]
+position = Vector2(126.5, -41)
+shape = SubResource("RectangleShape2D_dj5xc")
+
+[node name="TutoLabel2" parent="Tuto" instance=ExtResource("7_dj5xc")]
+position = Vector2(799, -268)
+tuto_text = "You can jump off a wall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tuto/TutoLabel2"]
+position = Vector2(232, 95)
+shape = SubResource("RectangleShape2D_dj5xc")
 
 [connection signal="body_entered" from="TutorialCutsceneTrigger" to="TutorialCutsceneTrigger" method="_on_body_entered"]

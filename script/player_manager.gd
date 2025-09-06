@@ -9,6 +9,7 @@ var player_position:Vector2
 var is_facing_right:bool
 var dash_cooldown:float
 var can_dash:bool
+var bonus_time:int
 
 func _ready() -> void:
 	has_unlocked_dash = false
@@ -19,6 +20,7 @@ func _ready() -> void:
 	is_facing_right = true
 	dash_cooldown = 2.5
 	can_dash = true
+	bonus_time = 0
 
 func unlock_dash() -> void:
 	has_unlocked_dash = true
@@ -37,6 +39,9 @@ func increase_speed() -> void:
 
 func decrease_dash_cooldown() -> void:
 	dash_cooldown -= 0.1
+
+func increase_bonus_time() -> void:
+	bonus_time += 30
 
 func set_position(new_player_position:Vector2) -> void:
 	player_position = new_player_position
@@ -64,3 +69,6 @@ func get_dash_cooldown() -> float:
 
 func get_can_dash() -> bool:
 	return can_dash
+
+func get_bonus_time() -> int:
+	return bonus_time

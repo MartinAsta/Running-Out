@@ -4,12 +4,15 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 - Yes
 	TIME: WHAT DO YOU WANT TO UPGRADE ?
 	- My speed
-		TIME: I WILL NEED {{GameManager.get_upgrade_cost("speed_cost")}} GRAINS OF SAND TO MAKE YOU FASTER.
-		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("speed_cost"):
+		if GameManager.get_speed_maxed_flag():
+			TIME: I CANNOT UPGRADE YOUR SPEED ANY FURTHER.
+		elif PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("speed_cost"):
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("speed_cost")}} GRAINS OF SAND TO MAKE YOU FASTER.
 			- I don't have enough sand...
 				do PlayerStateManager.leave_cutscene()
 				=> END
 		else:
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("speed_cost")}} GRAINS OF SAND TO MAKE YOU FASTER.
 			- Yes
 				TIME: SO BE IT. YOU ARE NOW 1% FASTER.
 				do TimeStateManager.speed_upgrade()
@@ -20,15 +23,37 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 	- My dash
-		TIME: I WILL NEED {{GameManager.get_upgrade_cost("dash_cooldown_cost")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.
-		if PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("dash_cooldown_cost"):
+		if GameManager.get_dash_maxed_flag():
+			TIME: I CANNOT UPGRADE YOUR DASH ABILITY ANY FURTHER.
+		elif PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("dash_cooldown_cost"):
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("dash_cooldown_cost")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.
 			- I don't have enough sand...
 				do PlayerStateManager.leave_cutscene()
 				=> END
 		else:
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("dash_cooldown_cost")}} GRAINS OF SALT TO ALLOW YOUR DASH ABILITY TO RECOVER FASTER.
 			- Yes
 				TIME: SO BE IT. YOUR DASH ABILITY NOW RECOVERS FASTER.
 				do TimeStateManager.dash_cooldown_upgrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				TIME: AS YOU WISH
+				do PlayerStateManager.leave_cutscene()
+				=> END
+	- How much time I have
+		if GameManager.get_bonus_time_maxed_flag():
+			TIME: I CANNOT GRANT YOU MORE TIME THAN THAT.
+		elif PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("bonus_time_cost"):
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("bonus_time_cost")}} GRAINS OF SAND TO GRANT YOU MORE TIME.
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("bonus_time_cost")}} GRAINS OF SAND TO GRANT YOU MORE TIME.
+			- Yes
+				TIME: SO BE IT. YOU NOW HAVE MORE TIME EACH TIME YOU ATTEMPT TO SLAY MY HEIRS.
+				do TimeStateManager.bonus_time_upgrade()
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
