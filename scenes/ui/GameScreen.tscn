@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://vheivpe0r5np"]
+[gd_scene load_steps=3 format=3 uid="uid://vheivpe0r5np"]
 
 [ext_resource type="PackedScene" uid="uid://cf8fxq1jeg21a" path="res://scenes/ui/wallet.tscn" id="1_5o1fi"]
+[ext_resource type="Script" uid="uid://bxp5duwmu2ggl" path="res://scenes/ui/game_screen.gd" id="1_neq6m"]
 
 [node name="GameScreen" type="CanvasLayer"]
+script = ExtResource("1_neq6m")
 
 [node name="Wallet" parent="." instance=ExtResource("1_5o1fi")]
 position = Vector2(249.5, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 49.0
+offset_bottom = 31.0

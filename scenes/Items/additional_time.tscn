@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://v18egd7fp403"]
+
+[ext_resource type="Texture2D" uid="uid://yjq3u7c05rny" path="res://assets/32x32.png" id="1_ulg3f"]
+[ext_resource type="Script" uid="uid://tvmwwa6jmlf0" path="res://scenes/Items/additional_time.gd" id="2_uapor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uapor"]
+size = Vector2(32, 32)
+
+[node name="AdditionalTime" type="Sprite2D"]
+position = Vector2(0, -16)
+texture = ExtResource("1_ulg3f")
+region_enabled = true
+region_rect = Rect2(352, 1568, 32, 32)
+script = ExtResource("2_uapor")
+
+[node name="DescriptionTriggerArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DescriptionTriggerArea2D"]
+shape = SubResource("RectangleShape2D_uapor")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -105.0
+offset_top = -46.0
+offset_right = -18.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Grants 30 
+bonus seconds"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -105.0
+offset_top = -7.0
+offset_right = -65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[connection signal="body_entered" from="DescriptionTriggerArea2D" to="." method="_on_description_trigger_area_2d_body_entered"]
+[connection signal="body_exited" from="DescriptionTriggerArea2D" to="." method="_on_description_trigger_area_2d_body_exited"]

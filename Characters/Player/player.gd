@@ -28,17 +28,23 @@ var can_go_higher:bool
 var can_go_higher_wall:bool
 var was_on_floor:bool
 var was_on_wall:bool
-var is_dashing:bool = false
+var is_dashing:bool
 var dash_direction:Vector2
-var can_take_portal:bool = false
-var can_take_shop_portal:bool = false
-var can_initiate_dialogue:bool = false
+var can_take_portal:bool
+var can_take_shop_portal:bool
+var can_initiate_dialogue:bool
 var can_take_damage:bool
+var can_buy_item:bool
 
 func _ready() -> void:
 	current_state = State.IDLE
 	GameManager.player_takes_damage.connect(on_player_takes_damage)
 	can_take_damage = true
+	can_buy_item = false
+	can_initiate_dialogue = false
+	can_take_shop_portal = false
+	can_take_portal = false
+	is_dashing = false
 
 func _physics_process(delta) -> void:
 	SPEED = NORMAL_SPEED * PlayerStateManager.player_speed_multiplicator
@@ -53,6 +59,7 @@ func _physics_process(delta) -> void:
 		take_portal()
 		take_shop_portal()
 		initiate_dialogue()
+		buy_shop_item()
 	else:
 		velocity.x = 0
 		current_state = State.IDLE
@@ -206,6 +213,12 @@ func take_shop_portal() -> void:
 	if Input.is_action_just_pressed("interact"):
 		GameManager.player_takes_shop_portal()
 
+func buy_shop_item() -> void:
+	if !can_buy_item:
+		return
+	if Input.is_action_just_pressed("interact"):
+		GameManager.player_buys_item()
+
 func initiate_dialogue() -> void:
 	if !can_initiate_dialogue:
 		return
@@ -255,6 +268,9 @@ func set_can_take_shop_portal(b:bool) -> void:
 
 func set_can_initiate_dialogue(b:bool) -> void:
 	can_initiate_dialogue = b
+
+func set_can_buy_item(b:bool) -> void:
+	can_buy_item = b
 
 func on_player_takes_damage() -> void:
 	if can_take_damage:

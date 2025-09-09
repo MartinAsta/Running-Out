@@ -10,17 +10,21 @@ var is_facing_right:bool
 var dash_cooldown:float
 var can_dash:bool
 var bonus_time:int
+var number_of_shop_items:int
+var currently_hovered_shop_item:String
 
 func _ready() -> void:
 	has_unlocked_dash = false
 	is_in_cutscene = false
-	seconds_currency = 0
+	seconds_currency = 5000
 	player_speed_multiplicator = 1
 	player_position = Vector2(0,0)
 	is_facing_right = true
 	dash_cooldown = 2.5
 	can_dash = true
 	bonus_time = 0
+	number_of_shop_items = 1
+	currently_hovered_shop_item = ""
 
 func unlock_dash() -> void:
 	has_unlocked_dash = true
@@ -43,6 +47,9 @@ func decrease_dash_cooldown() -> void:
 func increase_bonus_time() -> void:
 	bonus_time += 30
 
+func increase_shop_items_pool() -> void:
+	number_of_shop_items += 1
+
 func set_position(new_player_position:Vector2) -> void:
 	player_position = new_player_position
 
@@ -51,6 +58,9 @@ func set_is_facing_right(b:bool) -> void:
 
 func set_can_dash(b:bool) -> void:
 	can_dash = b
+
+func set_currently_hovered_shop_item(s:String) -> void:
+	currently_hovered_shop_item = s
 
 func get_seconds_currency() -> String:
 	return str(int(seconds_currency))
@@ -72,3 +82,9 @@ func get_can_dash() -> bool:
 
 func get_bonus_time() -> int:
 	return bonus_time
+
+func get_number_of_shop_items() -> int:
+	return number_of_shop_items
+
+func get_currently_hovered_shop_item() -> String:
+	return currently_hovered_shop_item

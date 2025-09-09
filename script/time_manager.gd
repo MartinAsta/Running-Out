@@ -58,6 +58,11 @@ func bonus_time_upgrade() -> void:
 	GameManager.increase_bonus_time_upgrade_cost()
 	PlayerStateManager.increase_bonus_time()
 
+func shop_items_ugrade() -> void:
+	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("shop_items")))
+	GameManager.increase_shop_items_upgrade_costs()
+	PlayerStateManager.increase_shop_items_pool()
+
 func set_flag() -> void:
 	if !introduction_flag:
 		introduction_flag = true

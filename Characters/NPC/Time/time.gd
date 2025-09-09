@@ -32,6 +32,8 @@ func _on_interaction_area_2d_body_exited(body):
 		player.set_can_initiate_dialogue(false)
 
 func on_trigger_dialogue() -> void:
+	if PlayerStateManager.get_currently_hovered_shop_item() != "":
+		return
 	if GameManager.get_is_in_shop():
 		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
 		get_tree().current_scene.add_child(balloon)

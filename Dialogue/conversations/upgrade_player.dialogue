@@ -19,7 +19,7 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 	- My dash
@@ -38,7 +38,7 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 	- How much time I have
@@ -57,7 +57,26 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
+				do PlayerStateManager.leave_cutscene()
+				=> END
+	- How much items are being sold in the shops
+		if GameManager.get_shop_items_maxed_flag():
+			Time: YOU CANNOT HAVE MORE OPTIONS THAN YOU ALREADY DO.
+		elif PlayerStateManager.get_sand() < GameManager.get_upgrade_cost("shop_items"):
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("shop_items")}} GRAINS OF SAND TO DO THAT.
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost("shop_items")}} GRAINS OF SAND TO DO THAT.
+			- Yes
+				TIME: SO BE IT. YOU WILL NOW HAVE MORE OPTIONS IN THE SHOPS.
+				do TimeStateManager.shop_items_ugrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				Time: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 - No

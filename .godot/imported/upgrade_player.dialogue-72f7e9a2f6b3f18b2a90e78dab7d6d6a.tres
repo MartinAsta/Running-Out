@@ -8,7 +8,7 @@ using_states = PackedStringArray()
 titles = {
 "start": "1"
 }
-character_names = PackedStringArray("TIME")
+character_names = PackedStringArray("TIME", "Time")
 first_title = "0"
 lines = {
 "0": {
@@ -82,7 +82,7 @@ lines = {
 &"condition": {},
 &"id": "13",
 &"next_id": "14",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"type": "condition"
 },
 "14": {
@@ -201,7 +201,7 @@ lines = {
 &"character": "TIME",
 &"id": "21",
 &"next_id": "22",
-&"text": "AS YOU WISH",
+&"text": "AS YOU WISH.",
 &"type": "dialogue"
 },
 "22": {
@@ -262,14 +262,14 @@ lines = {
 },
 &"id": "25",
 &"next_id": "26",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "27",
 &"type": "condition"
 },
 "26": {
 &"character": "TIME",
 &"id": "26",
-&"next_id": "65",
+&"next_id": "84",
 &"text": "I CANNOT UPGRADE YOUR DASH ABILITY ANY FURTHER.",
 &"type": "dialogue"
 },
@@ -317,7 +317,7 @@ lines = {
 },
 &"id": "27",
 &"next_id": "28",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "32",
 &"type": "condition"
 },
@@ -361,7 +361,7 @@ lines = {
 "3": {
 &"id": "3",
 &"next_id": "4",
-&"responses": PackedStringArray("3", "62"),
+&"responses": PackedStringArray("3", "81"),
 &"text": "Yes",
 &"type": "response"
 },
@@ -400,7 +400,7 @@ lines = {
 &"condition": {},
 &"id": "32",
 &"next_id": "33",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"type": "condition"
 },
 "33": {
@@ -519,7 +519,7 @@ lines = {
 &"character": "TIME",
 &"id": "40",
 &"next_id": "41",
-&"text": "AS YOU WISH",
+&"text": "AS YOU WISH.",
 &"type": "dialogue"
 },
 "41": {
@@ -580,14 +580,14 @@ lines = {
 },
 &"id": "44",
 &"next_id": "45",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "46",
 &"type": "condition"
 },
 "45": {
 &"character": "TIME",
 &"id": "45",
-&"next_id": "65",
+&"next_id": "84",
 &"text": "I CANNOT GRANT YOU MORE TIME THAN THAT.",
 &"type": "dialogue"
 },
@@ -635,7 +635,7 @@ lines = {
 },
 &"id": "46",
 &"next_id": "47",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "51",
 &"type": "condition"
 },
@@ -703,7 +703,7 @@ lines = {
 "5": {
 &"id": "5",
 &"next_id": "6",
-&"responses": PackedStringArray("5", "24", "43"),
+&"responses": PackedStringArray("5", "24", "43", "62"),
 &"text": "My speed",
 &"type": "response"
 },
@@ -718,7 +718,7 @@ lines = {
 &"condition": {},
 &"id": "51",
 &"next_id": "52",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"type": "condition"
 },
 "52": {
@@ -830,7 +830,7 @@ lines = {
 &"character": "TIME",
 &"id": "59",
 &"next_id": "60",
-&"text": "AS YOU WISH",
+&"text": "AS YOU WISH.",
 &"type": "dialogue"
 },
 "6": {
@@ -854,7 +854,7 @@ lines = {
 },
 &"id": "6",
 &"next_id": "7",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "8",
 &"type": "condition"
 },
@@ -892,73 +892,152 @@ lines = {
 "62": {
 &"id": "62",
 &"next_id": "63",
-&"text": "No",
+&"text": "How much items are being sold in the shops",
 &"type": "response"
 },
 "63": {
-&"id": "63",
-&"mutation": {
+&"condition": {
 &"expression": Array[Dictionary]([{
-&"i": 3,
+&"i": 5,
 &"type": &"variable",
-&"value": "PlayerStateManager"
+&"value": "GameManager"
 }, {
-&"i": 21,
+&"i": 16,
 &"type": &"dot"
 }, {
-&"function": "leave_cutscene",
-&"i": 22,
+&"function": "get_shop_items_maxed_flag",
+&"i": 17,
 &"type": &"function",
 &"value": Array[Array]([Array[Dictionary]([{
-&"i": 37,
+&"i": 43,
 &"type": &"parens_close"
 }])])
-}]),
-&"is_blocking": true
+}])
 },
+&"id": "63",
 &"next_id": "64",
-&"type": "mutation"
+&"next_id_after": "84",
+&"next_sibling_id": "65",
+&"type": "condition"
 },
 "64": {
+&"character": "Time",
 &"id": "64",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
+&"next_id": "84",
+&"text": "YOU CANNOT HAVE MORE OPTIONS THAN YOU ALREADY DO.",
+&"type": "dialogue"
 },
 "65": {
-&"id": "65",
-&"mutation": {
+&"condition": {
 &"expression": Array[Dictionary]([{
-&"i": 3,
+&"i": 7,
 &"type": &"variable",
 &"value": "PlayerStateManager"
 }, {
-&"i": 21,
+&"i": 25,
 &"type": &"dot"
 }, {
-&"function": "leave_cutscene",
-&"i": 22,
+&"function": "get_sand",
+&"i": 26,
 &"type": &"function",
 &"value": Array[Array]([Array[Dictionary]([{
+&"i": 35,
+&"type": &"parens_close"
+}])])
+}, {
 &"i": 37,
+&"type": &"comparison",
+&"value": "<"
+}, {
+&"i": 39,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 50,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 51,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 68,
+&"type": &"string",
+&"value": "shop_items"
+}, {
+&"i": 80,
+&"type": &"parens_close"
+}])])
+}])
+},
+&"id": "65",
+&"next_id": "66",
+&"next_id_after": "84",
+&"next_sibling_id": "70",
+&"type": "condition"
+},
+"66": {
+&"character": "TIME",
+&"id": "66",
+&"next_id": "67",
+&"text": "I WILL NEED {{GameManager.get_upgrade_cost(\"shop_items\")}} GRAINS OF SAND TO DO THAT.",
+&"text_replacements": Array[Dictionary]([{
+&"expression": Array[Dictionary]([{
+&"i": 23,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 52,
+&"type": &"string",
+&"value": "shop_items"
+}, {
+&"i": 64,
 &"type": &"parens_close"
 }])])
 }]),
-&"is_blocking": true
-},
-&"next_id": "66",
-&"type": "mutation"
-},
-"66": {
-&"id": "66",
-&"is_snippet": false,
-&"next_id": "end",
-&"next_id_after": "",
-&"type": "goto"
+&"value_in_text": "{{GameManager.get_upgrade_cost(\"shop_items\")}}"
+}]),
+&"type": "dialogue"
 },
 "67": {
 &"id": "67",
+&"next_id": "68",
+&"responses": PackedStringArray("67"),
+&"text": "I don't have enough sand...",
+&"type": "response"
+},
+"68": {
+&"id": "68",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "69",
+&"type": "mutation"
+},
+"69": {
+&"id": "69",
 &"is_snippet": false,
 &"next_id": "end",
 &"next_id_after": "",
@@ -967,9 +1046,152 @@ lines = {
 "7": {
 &"character": "TIME",
 &"id": "7",
-&"next_id": "65",
+&"next_id": "84",
 &"text": "I CANNOT UPGRADE YOUR SPEED ANY FURTHER.",
 &"type": "dialogue"
+},
+"70": {
+&"condition": {},
+&"id": "70",
+&"next_id": "71",
+&"next_id_after": "84",
+&"type": "condition"
+},
+"71": {
+&"character": "TIME",
+&"id": "71",
+&"next_id": "72",
+&"text": "I WILL NEED {{GameManager.get_upgrade_cost(\"shop_items\")}} GRAINS OF SAND TO DO THAT.",
+&"text_replacements": Array[Dictionary]([{
+&"expression": Array[Dictionary]([{
+&"i": 23,
+&"type": &"variable",
+&"value": "GameManager"
+}, {
+&"i": 34,
+&"type": &"dot"
+}, {
+&"function": "get_upgrade_cost",
+&"i": 35,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 52,
+&"type": &"string",
+&"value": "shop_items"
+}, {
+&"i": 64,
+&"type": &"parens_close"
+}])])
+}]),
+&"value_in_text": "{{GameManager.get_upgrade_cost(\"shop_items\")}}"
+}]),
+&"type": "dialogue"
+},
+"72": {
+&"id": "72",
+&"next_id": "73",
+&"responses": PackedStringArray("72", "77"),
+&"text": "Yes",
+&"type": "response"
+},
+"73": {
+&"character": "TIME",
+&"id": "73",
+&"next_id": "74",
+&"text": "SO BE IT. YOU WILL NOW HAVE MORE OPTIONS IN THE SHOPS.",
+&"type": "dialogue"
+},
+"74": {
+&"id": "74",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "TimeStateManager"
+}, {
+&"i": 19,
+&"type": &"dot"
+}, {
+&"function": "shop_items_ugrade",
+&"i": 20,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 38,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "75",
+&"type": "mutation"
+},
+"75": {
+&"id": "75",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "76",
+&"type": "mutation"
+},
+"76": {
+&"id": "76",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"77": {
+&"id": "77",
+&"next_id": "78",
+&"text": "No",
+&"type": "response"
+},
+"78": {
+&"character": "Time",
+&"id": "78",
+&"next_id": "79",
+&"text": "AS YOU WISH.",
+&"type": "dialogue"
+},
+"79": {
+&"id": "79",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "80",
+&"type": "mutation"
 },
 "8": {
 &"condition": {
@@ -1015,9 +1237,91 @@ lines = {
 },
 &"id": "8",
 &"next_id": "9",
-&"next_id_after": "65",
+&"next_id_after": "84",
 &"next_sibling_id": "13",
 &"type": "condition"
+},
+"80": {
+&"id": "80",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"81": {
+&"id": "81",
+&"next_id": "82",
+&"text": "No",
+&"type": "response"
+},
+"82": {
+&"id": "82",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "83",
+&"type": "mutation"
+},
+"83": {
+&"id": "83",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"84": {
+&"id": "84",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "85",
+&"type": "mutation"
+},
+"85": {
+&"id": "85",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"86": {
+&"id": "86",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
 },
 "9": {
 &"character": "TIME",
@@ -1071,7 +1375,7 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 	- My dash
@@ -1090,7 +1394,7 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 	- How much time I have
@@ -1109,7 +1413,26 @@ TIME: DO YOU WISH TO SPEND SOME OF YOUR SAND ?
 				do PlayerStateManager.leave_cutscene()
 				=> END
 			- No
-				TIME: AS YOU WISH
+				TIME: AS YOU WISH.
+				do PlayerStateManager.leave_cutscene()
+				=> END
+	- How much items are being sold in the shops
+		if GameManager.get_shop_items_maxed_flag():
+			Time: YOU CANNOT HAVE MORE OPTIONS THAN YOU ALREADY DO.
+		elif PlayerStateManager.get_sand() < GameManager.get_upgrade_cost(\"shop_items\"):
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost(\"shop_items\")}} GRAINS OF SAND TO DO THAT.
+			- I don't have enough sand...
+				do PlayerStateManager.leave_cutscene()
+				=> END
+		else:
+			TIME: I WILL NEED {{GameManager.get_upgrade_cost(\"shop_items\")}} GRAINS OF SAND TO DO THAT.
+			- Yes
+				TIME: SO BE IT. YOU WILL NOW HAVE MORE OPTIONS IN THE SHOPS.
+				do TimeStateManager.shop_items_ugrade()
+				do PlayerStateManager.leave_cutscene()
+				=> END
+			- No
+				Time: AS YOU WISH.
 				do PlayerStateManager.leave_cutscene()
 				=> END
 - No

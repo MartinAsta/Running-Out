@@ -18,6 +18,7 @@ var has_lost:bool
 var completed_levels:Array[int]
 var score_multiplicator:float
 var upgrade_cost:Dictionary
+var shop_item_cost:Dictionary
 var shop_odds:int
 var speed_upgrade_costs:Array[int]
 var speed_upgrade_costs_index:int
@@ -25,15 +26,22 @@ var dash_upgrade_costs:Array[int]
 var dash_upgrade_costs_index:int
 var bonus_time_upgrade_costs:Array[int]
 var bonus_time_upgrade_costs_index:int
+var shop_items_upgrade_costs:Array[int]
+var shop_items_upgrade_costs_index:int
 var damage:int
+var price_multiplicator:float
+var cheat_death:int
 
 var first_loss_flag:bool
 var first_win_flag:bool
 var speed_maxed_flag:bool
 var dash_maxed_flag:bool
 var bonus_time_maxed_flag:bool
+var shop_items_maxed_flag:bool
 
 signal player_takes_damage
+signal update_cheat_death_count
+signal item_bought
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color(0.8,0.95,0.99))
@@ -53,21 +61,31 @@ func _ready() -> void:
 	speed_maxed_flag = false
 	dash_maxed_flag = false
 	bonus_time_maxed_flag = false
+	shop_items_maxed_flag = false
 	first_loss_flag = false
 	first_win_flag = false
-	shop_odds = 10
+	shop_odds = 50
 	speed_upgrade_costs = [100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,5000]
 	speed_upgrade_costs_index = 0
 	dash_upgrade_costs = [200,400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200,3600,4000,5000,6000,7000,8000,1000]
 	dash_upgrade_costs_index = 0
 	bonus_time_upgrade_costs = [100,1000,3000,10000]
 	bonus_time_upgrade_costs_index = 0
+	shop_items_upgrade_costs = [100,500]
+	shop_items_upgrade_costs_index = 0
 	upgrade_cost = {
 		"speed_cost" : speed_upgrade_costs[0],
 		"dash_cooldown_cost" : dash_upgrade_costs[0],
-		"bonus_time_cost": bonus_time_upgrade_costs[0]
+		"bonus_time_cost": bonus_time_upgrade_costs[0],
+		"shop_items": shop_items_upgrade_costs[0]
+	}
+	shop_item_cost = {
+		"nullify_death" : 50,
+		"bonus_time" : 35
 	}
 	damage = 10
+	price_multiplicator = 1
+	cheat_death = 0
 
 func _process(delta):
 	if has_crossed_finish_line and remaining_time > 0:
@@ -141,6 +159,9 @@ func player_takes_portal() -> void:
 			get_tree().change_scene_to_file("res://levels/World1/W1_map9.tscn")
 			start_level()
 			current_level += 1
+	print(current_world)
+	print(current_level)
+	print("__________________")
 	has_crossed_finish_line = false
 	is_in_shop = false
 	PlayerStateManager.set_can_dash(true)
@@ -148,6 +169,7 @@ func player_takes_portal() -> void:
 func player_takes_shop_portal() -> void:
 	is_in_shop = true
 	get_tree().change_scene_to_file("res://levels/Peaceful_Levels/shop.tscn")
+	PlayerStateManager.set_can_dash(true)
 
 func pick_level() -> int:
 	var rng = RandomNumberGenerator.new()
@@ -185,6 +207,15 @@ func increase_bonus_time_upgrade_cost() -> void:
 	else:
 		upgrade_cost["bonus_time_cost"] = bonus_time_upgrade_costs[bonus_time_upgrade_costs_index]
 
+func increase_shop_items_upgrade_costs() -> void:
+	if shop_items_maxed_flag:
+		return
+	shop_items_upgrade_costs_index += 1
+	if shop_items_upgrade_costs_index == len(shop_items_upgrade_costs):
+		shop_items_maxed_flag = true
+	else:
+		upgrade_cost["shop_items"] = shop_items_upgrade_costs[shop_items_upgrade_costs_index]
+
 func start_run() -> void:
 	current_world = 1
 	has_lost = false
@@ -197,7 +228,11 @@ func player_deal_damage() -> void:
 	player_takes_damage.emit()
 
 func deduce_time() -> void:
-	run_remaining_time -= damage
+	if cheat_death > 0:
+		cheat_death -= 1
+		update_cheat_death_count.emit()
+	else:
+		run_remaining_time -= damage
 
 func reset_timer() -> void:
 	remaining_time = max_remaining_time
@@ -216,6 +251,21 @@ func increase_shop_odds(odds:int) -> void:
 
 func reset_shop_odds() -> void:
 	shop_odds = 10
+
+func player_buys_item() -> void:
+	var shop_item:String = PlayerStateManager.get_currently_hovered_shop_item()
+	if PlayerStateManager.get_sand() < (get_shop_item_cost(shop_item) * price_multiplicator):
+		print("Too expensive")
+		return
+	
+	PlayerStateManager.modify_seconds_currency_count(-(get_shop_item_cost(shop_item) * price_multiplicator))
+	
+	if shop_item == "nullify_death":
+		cheat_death += 1
+		update_cheat_death_count.emit()
+	elif shop_item == "bonus_time":
+		run_remaining_time += 30
+	item_bought.emit()
 
 func set_is_in_resting_area(b:bool) -> void:
 	is_in_resting_area = b
@@ -253,6 +303,9 @@ func get_first_win_flag() -> bool:
 func get_upgrade_cost(upgrade:String) -> int:
 	return upgrade_cost[upgrade]
 
+func get_shop_item_cost(item:String) -> int:
+	return shop_item_cost[item]
+
 func get_shop_odds() -> int:
 	return shop_odds
 
@@ -267,3 +320,9 @@ func get_dash_maxed_flag() -> bool:
 
 func get_bonus_time_maxed_flag() -> bool:
 	return bonus_time_maxed_flag
+
+func get_shop_items_maxed_flag() -> bool:
+	return shop_items_maxed_flag
+
+func get_cheat_death() -> int:
+	return cheat_death

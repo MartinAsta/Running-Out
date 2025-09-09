@@ -441,6 +441,7 @@ horizontal_alignment = 1
 position = Vector2(0, -83)
 
 [node name="LostTimeCDTimer" type="Timer" parent="."]
+wait_time = 0.25
 one_shot = true
 
 [connection signal="timeout" from="JumpHeightVariationTimer" to="." method="_on_jump_height_variation_timer_timeout"]
