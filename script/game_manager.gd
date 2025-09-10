@@ -64,7 +64,7 @@ func _ready() -> void:
 	shop_items_maxed_flag = false
 	first_loss_flag = false
 	first_win_flag = false
-	shop_odds = 50
+	shop_odds = 10
 	speed_upgrade_costs = [100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,5000]
 	speed_upgrade_costs_index = 0
 	dash_upgrade_costs = [200,400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200,3600,4000,5000,6000,7000,8000,1000]
@@ -159,9 +159,6 @@ func player_takes_portal() -> void:
 			get_tree().change_scene_to_file("res://levels/World1/W1_map9.tscn")
 			start_level()
 			current_level += 1
-	print(current_world)
-	print(current_level)
-	print("__________________")
 	has_crossed_finish_line = false
 	is_in_shop = false
 	PlayerStateManager.set_can_dash(true)

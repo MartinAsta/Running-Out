@@ -66,12 +66,16 @@ func _gather_state() -> Dictionary:
 			"speed_upgrade_costs_index": game.speed_upgrade_costs_index,
 			"dash_upgrade_costs_index": game.dash_upgrade_costs_index,
 			"bonus_time_upgrade_costs_index": game.bonus_time_upgrade_costs_index,
+			"shop_items_upgrade_costs_index": game.shop_items_upgrade_costs_index,
 			"damage": game.damage,
 			"first_loss_flag": game.first_loss_flag,
 			"first_win_flag": game.first_win_flag,
 			"speed_maxed_flag": game.speed_maxed_flag,
 			"dash_maxed_flag": game.dash_maxed_flag,
-			"bonus_time_maxed_flag": game.bonus_time_maxed_flag
+			"bonus_time_maxed_flag": game.bonus_time_maxed_flag,
+			"shop_items_maxed_flag": game.shop_items_maxed_flag,
+			"price_multiplicator": game.price_multiplicator,
+			"cheat_death": game.cheat_death
 		},
 
 		"player": {
@@ -83,7 +87,9 @@ func _gather_state() -> Dictionary:
 			"is_facing_right": player.is_facing_right,
 			"dash_cooldown": player.dash_cooldown,
 			"can_dash": player.can_dash,
-			"bonus_time": player.bonus_time
+			"bonus_time": player.bonus_time,
+			"number_of_shop_items": player.number_of_shop_items,
+			"currently_hovered_shop_item": player.currently_hovered_shop_item
 		},
 
 		"time": {

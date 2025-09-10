@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bx4wie50g8ftt"]
+[gd_scene load_steps=12 format=4 uid="uid://bx4wie50g8ftt"]
 
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="1_g06vr"]
 [ext_resource type="PackedScene" uid="uid://cl1tpxtm2dgyh" path="res://Characters/Player/player.tscn" id="2_fiq4n"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dd0ubona27lnr" path="res://scenes/checkpoint.tscn" id="5_5318i"]
 [ext_resource type="PackedScene" uid="uid://b2uux8ix0myt" path="res://scenes/fall_detection_area_2d.tscn" id="6_dj5xc"]
 [ext_resource type="PackedScene" uid="uid://c0svkw0eemfqd" path="res://scenes/ui/tuto_label.tscn" id="7_dj5xc"]
+[ext_resource type="PackedScene" uid="uid://vheivpe0r5np" path="res://scenes/ui/GameScreen.tscn" id="8_eh4to"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpupe"]
 size = Vector2(33.5, 385)
@@ -76,5 +77,7 @@ tuto_text = "You can jump off a wall"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tuto/TutoLabel2"]
 position = Vector2(232, 95)
 shape = SubResource("RectangleShape2D_dj5xc")
+
+[node name="GameScreen" parent="." instance=ExtResource("8_eh4to")]
 
 [connection signal="body_entered" from="TutorialCutsceneTrigger" to="TutorialCutsceneTrigger" method="_on_body_entered"]
