@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://8u6lpy8dysrs"]
+[gd_scene load_steps=15 format=4 uid="uid://8u6lpy8dysrs"]
 
 [ext_resource type="PackedScene" uid="uid://taqarnefwhp3" path="res://scenes/test/W1_parallax_bg.tscn" id="1_2wfko"]
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="2_cms5a"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bm3r5gp6y1s1e" path="res://scenes/FinishLineArea.tscn" id="8_ox8ky"]
 [ext_resource type="PackedScene" uid="uid://vheivpe0r5np" path="res://scenes/ui/GameScreen.tscn" id="9_ocihl"]
 [ext_resource type="PackedScene" uid="uid://b55hakkatrlpy" path="res://Characters/NPC/Portal/shop_portal.tscn" id="10_4noct"]
+[ext_resource type="PackedScene" uid="uid://cc5ng8w3qgopa" path="res://Characters/NPC/Portal/boss_portal.tscn" id="11_2wfko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh4to"]
 size = Vector2(16221, 42)
@@ -66,7 +67,7 @@ position = Vector2(5021.5, 92)
 shape = SubResource("RectangleShape2D_eh4to")
 
 [node name="Portal" parent="." instance=ExtResource("6_8hbx1")]
-position = Vector2(5202, -227)
+position = Vector2(5183, -227)
 
 [node name="PauseArea" parent="." instance=ExtResource("7_15vo7")]
 position = Vector2(5453, -429)
@@ -90,3 +91,6 @@ debug_color = Color(5.58317e-06, 0.627649, 0.499892, 0.42)
 position = Vector2(5252, -227)
 
 [node name="Traps" type="Node" parent="."]
+
+[node name="BossPortal" parent="." instance=ExtResource("11_2wfko")]
+position = Vector2(5111, -227)

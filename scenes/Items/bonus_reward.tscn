@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8lb7a8gmu20u"]
+
+[ext_resource type="Texture2D" uid="uid://yjq3u7c05rny" path="res://assets/32x32.png" id="1_tj1ul"]
+[ext_resource type="Script" uid="uid://nqrvsurr6mhk" path="res://scenes/Items/bonus_reward.gd" id="2_pcmy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcmy5"]
+size = Vector2(32, 32)
+
+[node name="bonus_reward" type="Sprite2D"]
+position = Vector2(0, -16)
+texture = ExtResource("1_tj1ul")
+region_enabled = true
+region_rect = Rect2(288, 640, 32, 32)
+script = ExtResource("2_pcmy5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pcmy5")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -120.0
+offset_top = -45.0
+offset_right = 9.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 12
+text = "The next three rooms 
+give more sand"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -120.0
+offset_top = -4.0
+offset_right = -80.0
+offset_bottom = 19.0
+theme_override_font_sizes/font_size = 12
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

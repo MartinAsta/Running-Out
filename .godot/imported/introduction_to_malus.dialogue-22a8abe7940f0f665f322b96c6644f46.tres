@@ -1,0 +1,126 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_vgvxl"]
+
+[resource]
+script = ExtResource("1_vgvxl")
+using_states = PackedStringArray()
+titles = {
+"start": "1"
+}
+character_names = PackedStringArray("TIME", "Martin")
+first_title = "0"
+lines = {
+"0": {
+&"id": "0",
+&"next_id": "1",
+&"type": "title"
+},
+"1": {
+&"id": "1",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "enter_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "2",
+&"type": "mutation"
+},
+"2": {
+&"character": "TIME",
+&"id": "2",
+&"next_id": "3",
+&"text": "NOW THAT YOU ARE GETTING MORE FAMILIAR WITH YOUR POWER, IT IS TIME I EXPLAIN YOU SOMETHING ELSE.",
+&"type": "dialogue"
+},
+"3": {
+&"character": "TIME",
+&"id": "3",
+&"next_id": "4",
+&"text": "WOULD YOU ACCEPT IT, I COULD MAKE YOUR ATTEMPTS MORE DIFFICULT.",
+&"type": "dialogue"
+},
+"4": {
+&"character": "Martin",
+&"id": "4",
+&"next_id": "5",
+&"text": "Why on earth would I want that.",
+&"type": "dialogue"
+},
+"5": {
+&"character": "TIME",
+&"id": "5",
+&"next_id": "6",
+&"text": "BECAUSE THERE IS AN UPSIDE TO IT. IF YOU ENABLE ANY PENALTY, YOU WILL BE GRANTED MORE GRAINS OF SAND AT THE END OF EACH LEVEL.",
+&"type": "dialogue"
+},
+"6": {
+&"character": "Martin",
+&"id": "6",
+&"next_id": "7",
+&"text": "I will think about it...",
+&"type": "dialogue"
+},
+"7": {
+&"id": "7",
+&"mutation": {
+&"expression": Array[Dictionary]([{
+&"i": 3,
+&"type": &"variable",
+&"value": "PlayerStateManager"
+}, {
+&"i": 21,
+&"type": &"dot"
+}, {
+&"function": "leave_cutscene",
+&"i": 22,
+&"type": &"function",
+&"value": Array[Array]([Array[Dictionary]([{
+&"i": 37,
+&"type": &"parens_close"
+}])])
+}]),
+&"is_blocking": true
+},
+&"next_id": "8",
+&"type": "mutation"
+},
+"8": {
+&"id": "8",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+},
+"9": {
+&"id": "9",
+&"is_snippet": false,
+&"next_id": "end",
+&"next_id_after": "",
+&"type": "goto"
+}
+}
+raw_text = "~ start
+do PlayerStateManager.enter_cutscene()
+TIME: NOW THAT YOU ARE GETTING MORE FAMILIAR WITH YOUR POWER, IT IS TIME I EXPLAIN YOU SOMETHING ELSE.
+TIME: WOULD YOU ACCEPT IT, I COULD MAKE YOUR ATTEMPTS MORE DIFFICULT.
+Martin: Why on earth would I want that.
+TIME: BECAUSE THERE IS AN UPSIDE TO IT. IF YOU ENABLE ANY PENALTY, YOU WILL BE GRANTED MORE GRAINS OF SAND AT THE END OF EACH LEVEL.
+Martin: I will think about it...
+do PlayerStateManager.leave_cutscene()
+=> END"
+metadata/dialogue_manager_version = "3.7.1"

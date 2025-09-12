@@ -2,6 +2,7 @@ extends Node
 
 var nullify_death_item = preload("res://scenes/Items/nullify_death.tscn")
 var additional_time = preload("res://scenes/Items/additional_time.tscn")
+var bonus_reward = preload("res://scenes/Items/bonus_reward.tscn")
 
 var number_of_items:int
 var items_displayed:Array
@@ -28,11 +29,15 @@ func fill_slots() -> void:
 			var item = additional_time.instantiate()
 			slot.add_child(item)
 			item.position = Vector2.ZERO
+		elif picked_item == 3:
+			var item = bonus_reward.instantiate()
+			slot.add_child(item)
+			item.position = Vector2.ZERO
 
 func pick_item() -> int:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var item = rng.randi_range(1,2)
+	var item = rng.randi_range(1,3)
 	if items_displayed.has(item):
 		return pick_item()
 	items_displayed.append(item)

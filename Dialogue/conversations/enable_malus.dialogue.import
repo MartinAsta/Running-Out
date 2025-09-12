@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bnonaf3d8nx5p"
+path="res://.godot/imported/enable_malus.dialogue-06c1c58bf7572b1ae2584111cfc0bd4d.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/enable_malus.dialogue"
+dest_files=["res://.godot/imported/enable_malus.dialogue-06c1c58bf7572b1ae2584111cfc0bd4d.tres"]
+
+[params]
+
+defaults=true

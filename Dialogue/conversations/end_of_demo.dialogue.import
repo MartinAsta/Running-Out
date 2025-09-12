@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cun6w70m284pu"
+path="res://.godot/imported/end_of_demo.dialogue-011781a88115688b0339e3f64d0832d6.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/end_of_demo.dialogue"
+dest_files=["res://.godot/imported/end_of_demo.dialogue-011781a88115688b0339e3f64d0832d6.tres"]
+
+[params]
+
+defaults=true

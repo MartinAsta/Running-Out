@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dw75ts0smw2ln"
+path="res://.godot/imported/chose_malus_bonus.dialogue-107d565c53fca297201cb25e3fed7fd8.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/chose_malus_bonus.dialogue"
+dest_files=["res://.godot/imported/chose_malus_bonus.dialogue-107d565c53fca297201cb25e3fed7fd8.tres"]
+
+[params]
+
+defaults=true

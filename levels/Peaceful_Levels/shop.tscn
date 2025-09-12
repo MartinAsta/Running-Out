@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dqw7hhks2kqsr"]
+[gd_scene load_steps=14 format=4 uid="uid://dqw7hhks2kqsr"]
 
 [ext_resource type="PackedScene" uid="uid://taqarnefwhp3" path="res://scenes/test/W1_parallax_bg.tscn" id="1_iix3y"]
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="2_gbjf1"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://vheivpe0r5np" path="res://scenes/ui/GameScreen.tscn" id="8_47fdr"]
 [ext_resource type="PackedScene" uid="uid://cor0icdbaspow" path="res://scenes/PauseArea.tscn" id="9_gbjf1"]
 [ext_resource type="Script" uid="uid://1oh8su52mcsf" path="res://levels/Peaceful_Levels/shop_slots.gd" id="10_p4c8w"]
+[ext_resource type="PackedScene" uid="uid://cc5ng8w3qgopa" path="res://Characters/NPC/Portal/boss_portal.tscn" id="11_pggmu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwny1"]
 size = Vector2(3199, 32)
@@ -70,3 +71,6 @@ position = Vector2(300, -45)
 
 [node name="ShopSlot3" type="Node2D" parent="ShopSlots"]
 position = Vector2(612, -45)
+
+[node name="BossPortal" parent="." instance=ExtResource("11_pggmu")]
+position = Vector2(864, -35)

@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://cc5ng8w3qgopa"]
+
+[ext_resource type="Script" uid="uid://dgug7jos52n8g" path="res://Characters/NPC/Portal/boss_portal.gd" id="1_rwawn"]
+[ext_resource type="Shader" uid="uid://brskwbmc234u" path="res://Characters/NPC/Portal/boss_portal.gdshader" id="2_rwawn"]
+[ext_resource type="Texture2D" uid="uid://copuql75is41w" path="res://Characters/NPC/Portal/Dimensional_Portal.png" id="3_8xnj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cau5s"]
+shader = ExtResource("2_rwawn")
+shader_parameter/hue_shift = 0.586
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap315"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6drnr"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51jpo"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ovtx"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pvy7"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m0h4"]
+atlas = ExtResource("3_8xnj0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g868m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap315")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6drnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51jpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ovtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pvy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m0h4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ap315"]
+size = Vector2(34, 39)
+
+[node name="BossPortal" type="Node2D"]
+script = ExtResource("1_rwawn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_cau5s")
+position = Vector2(0, -19)
+sprite_frames = SubResource("SpriteFrames_g868m")
+autoplay = "default"
+frame_progress = 0.0726835
+
+[node name="InteractionArea2D" type="Area2D" parent="." groups=["Interactible"]]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
+position = Vector2(0, -19.5)
+shape = SubResource("RectangleShape2D_ap315")
+debug_color = Color(0.569516, 0.556276, 3.85046e-07, 0.42)
+
+[connection signal="body_entered" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_entered"]
+[connection signal="body_exited" from="InteractionArea2D" to="." method="_on_interaction_area_2d_body_exited"]

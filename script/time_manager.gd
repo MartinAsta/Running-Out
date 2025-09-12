@@ -6,6 +6,7 @@ var balloon_scene = preload("res://Dialogue/tutorial_dialogue_balloon.tscn")
 
 var introduction_flag:bool
 var introduction_to_bonus_flag:bool
+var introduction_to_malus_flag:bool
 
 signal tutorial_appearance()
 signal trigger_dialogue()
@@ -39,9 +40,16 @@ func start_dialogue() -> void:
 	trigger_dialogue.emit()
 
 func start_upgrade_dialogue() -> void:
+	await get_tree().create_timer(0.5).timeout
 	var balloon:GameDialogueBalloon = balloon_scene.instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(load("res://Dialogue/conversations/upgrade_player.dialogue"), "start")
+
+func start_malus_dialogue() -> void:
+	await get_tree().create_timer(0.5).timeout
+	var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+	get_tree().current_scene.add_child(balloon)
+	balloon.start(load("res://Dialogue/conversations/enable_malus.dialogue"), "start")
 
 func speed_upgrade() -> void:
 	PlayerStateManager.modify_seconds_currency_count(-(GameManager.get_upgrade_cost("speed_cost")))
@@ -68,9 +76,14 @@ func set_flag() -> void:
 		introduction_flag = true
 	elif !introduction_to_bonus_flag:
 		introduction_to_bonus_flag = true
+	elif !introduction_to_malus_flag:
+		introduction_to_malus_flag = true
 
 func get_introduction_flag() -> bool:
 	return introduction_flag
 
 func get_introduction_to_bonus_flag() -> bool:
 	return introduction_to_bonus_flag
+
+func get_introduction_to_malus_flag() -> bool:
+	return introduction_to_malus_flag

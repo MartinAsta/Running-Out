@@ -1,0 +1,30 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: WHICH PENALY WOULD YOU LIKE TO ENABLE OR DISABLE ?
+- None.
+	do PlayerStateManager.leave_cutscene()
+	=> END
+- More punishing falls/traps.
+	if GameManager.get_more_damage_flag():
+		TIME: FINE. THIS PENALTY HAS BEEN DISABLED.
+		do PlayerStateManager.leave_cutscene()
+		do GameManager.set_more_damage_flag()
+		=> END
+	else:
+		TIME: TRAPS AND FALLS WILL NOW BE MORE PUNISHING
+		do PlayerStateManager.leave_cutscene()
+		do GameManager.set_more_damage_flag()
+		=> END
+- More expensive shops.
+	if GameManager.get_more_expensive_shop_flag():
+		TIME: SHOPS WILL NOW BE LESS EXPENSIVE.
+		do PlayerStateManager.leave_cutscene()
+		do GameManager.set_more_expensive_shop_flag()
+		=> END
+	else:
+		TIME: SHOPS WILL NOW BE MORE EXPENSIVE.
+		do PlayerStateManager.leave_cutscene()
+		do GameManager.set_more_expensive_shop_flag()
+		=> END
+do PlayerStateManager.leave_cutscene()
+=> END

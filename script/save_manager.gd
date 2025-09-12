@@ -22,6 +22,7 @@ func _write_json(path: String, data: Dictionary) -> bool:
 		return false
 	file.store_string(text)
 	file.close()
+	print("Saved at:", ProjectSettings.globalize_path(path))
 	return true
 
 func _read_json(path: String) -> Dictionary:
@@ -69,13 +70,17 @@ func _gather_state() -> Dictionary:
 			"shop_items_upgrade_costs_index": game.shop_items_upgrade_costs_index,
 			"damage": game.damage,
 			"first_loss_flag": game.first_loss_flag,
+			"second_loss_flag": game.second_loss_flag,
 			"first_win_flag": game.first_win_flag,
 			"speed_maxed_flag": game.speed_maxed_flag,
 			"dash_maxed_flag": game.dash_maxed_flag,
 			"bonus_time_maxed_flag": game.bonus_time_maxed_flag,
 			"shop_items_maxed_flag": game.shop_items_maxed_flag,
 			"price_multiplicator": game.price_multiplicator,
-			"cheat_death": game.cheat_death
+			"cheat_death": game.cheat_death,
+			"more_damage_flag": game.more_damage_flag,
+			"more_expensive_shop_flag": game.more_expensive_shop_flag,
+			"bonus_reward_count": game.bonus_reward_count
 		},
 
 		"player": {
@@ -94,7 +99,8 @@ func _gather_state() -> Dictionary:
 
 		"time": {
 			"introduction_flag": time.introduction_flag,
-			"introduction_to_bonus_flag": time.introduction_to_bonus_flag
+			"introduction_to_bonus_flag": time.introduction_to_bonus_flag,
+			"introduction_to_malus_flag": time.introduction_to_malus_flag
 		}
 	}
 

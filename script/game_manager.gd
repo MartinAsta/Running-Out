@@ -33,11 +33,19 @@ var price_multiplicator:float
 var cheat_death:int
 
 var first_loss_flag:bool
+var second_loss_flag:bool
 var first_win_flag:bool
 var speed_maxed_flag:bool
 var dash_maxed_flag:bool
 var bonus_time_maxed_flag:bool
 var shop_items_maxed_flag:bool
+
+#items
+var bonus_reward_count:int
+
+#malus
+var more_damage_flag:bool
+var more_expensive_shop_flag:bool
 
 signal player_takes_damage
 signal update_cheat_death_count
@@ -63,6 +71,7 @@ func _ready() -> void:
 	bonus_time_maxed_flag = false
 	shop_items_maxed_flag = false
 	first_loss_flag = false
+	second_loss_flag = false
 	first_win_flag = false
 	shop_odds = 10
 	speed_upgrade_costs = [100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,5000]
@@ -81,11 +90,15 @@ func _ready() -> void:
 	}
 	shop_item_cost = {
 		"nullify_death" : 50,
-		"bonus_time" : 35
+		"bonus_time" : 35,
+		"bonus_reward" : 100
 	}
 	damage = 10
 	price_multiplicator = 1
 	cheat_death = 0
+	more_damage_flag = false
+	more_expensive_shop_flag = false
+	bonus_reward_count = 0
 
 func _process(delta):
 	if has_crossed_finish_line and remaining_time > 0:
@@ -110,7 +123,7 @@ func spawn_portal() -> void:
 	portal.global_position.y = PlayerStateManager.get_player_position().y
 
 func player_takes_portal() -> void:
-	if (current_world == -1 and !TimeStateManager.get_introduction_flag()) or (current_world == -1 and first_loss_flag and !TimeStateManager.get_introduction_to_bonus_flag()):
+	if (current_world == -1 and !TimeStateManager.get_introduction_flag()) or (current_world == -1 and first_loss_flag and !TimeStateManager.get_introduction_to_bonus_flag()) or (current_world == -1 and second_loss_flag and !TimeStateManager.get_introduction_to_malus_flag()):
 		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
 		get_tree().current_scene.add_child(balloon)
 		balloon.start(load("res://Dialogue/conversations/ignoring_time.dialogue"), "start")
@@ -120,6 +133,10 @@ func player_takes_portal() -> void:
 		get_tree().change_scene_to_file("res://levels/Peaceful_Levels/lobby.tscn")
 		current_world = -1
 	elif current_world == -1 or (current_world == 1 and current_level <= 10):
+		if bonus_reward_count > 0:
+			bonus_reward_count -= 1
+			if bonus_reward_count == 0:
+				score_multiplicator -+ 3
 		if(current_level == 0):
 			start_run()
 		var picked_level = pick_level()
@@ -159,6 +176,10 @@ func player_takes_portal() -> void:
 			get_tree().change_scene_to_file("res://levels/World1/W1_map9.tscn")
 			start_level()
 			current_level += 1
+		elif picked_level == 10:
+			get_tree().change_scene_to_file("res://levels/World1/W1_map10.tscn")
+			start_level()
+			current_level += 1
 	has_crossed_finish_line = false
 	is_in_shop = false
 	PlayerStateManager.set_can_dash(true)
@@ -168,10 +189,17 @@ func player_takes_shop_portal() -> void:
 	get_tree().change_scene_to_file("res://levels/Peaceful_Levels/shop.tscn")
 	PlayerStateManager.set_can_dash(true)
 
+func player_takes_boss_portal() -> void:
+	remaining_time = 100
+	run_remaining_time = 100
+	current_level = 11
+	get_tree().change_scene_to_file("res://levels/World1/W1_boss_1.tscn")
+	PlayerStateManager.set_can_dash(true)
+
 func pick_level() -> int:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var level = rng.randi_range(1,9)
+	var level = rng.randi_range(1,10)
 	if completed_levels.has(level):
 		return pick_level()
 	completed_levels.append(level)
@@ -214,6 +242,7 @@ func increase_shop_items_upgrade_costs() -> void:
 		upgrade_cost["shop_items"] = shop_items_upgrade_costs[shop_items_upgrade_costs_index]
 
 func start_run() -> void:
+	bonus_reward_count = 0
 	current_world = 1
 	has_lost = false
 	run_remaining_time = max_run_remaining_time + PlayerStateManager.get_bonus_time()
@@ -228,8 +257,13 @@ func deduce_time() -> void:
 	if cheat_death > 0:
 		cheat_death -= 1
 		update_cheat_death_count.emit()
-	else:
-		run_remaining_time -= damage
+		return
+		
+	var dmg = damage
+	if more_damage_flag:
+		dmg *= 2
+		
+	run_remaining_time -= dmg
 
 func reset_timer() -> void:
 	remaining_time = max_remaining_time
@@ -237,6 +271,17 @@ func reset_timer() -> void:
 func game_over() -> void:
 	if !first_loss_flag:
 		first_loss_flag = true
+	elif first_loss_flag and !second_loss_flag:
+		second_loss_flag = true
+	get_tree().change_scene_to_file("res://levels/Peaceful_Levels/lobby.tscn")
+	current_world = -1
+	current_level = 0
+	completed_levels = []
+	PlayerStateManager.set_can_dash(true)
+
+func end_demo() -> void:
+	if !first_win_flag:
+		first_win_flag = true
 	get_tree().change_scene_to_file("res://levels/Peaceful_Levels/lobby.tscn")
 	current_world = -1
 	current_level = 0
@@ -262,6 +307,9 @@ func player_buys_item() -> void:
 		update_cheat_death_count.emit()
 	elif shop_item == "bonus_time":
 		run_remaining_time += 30
+	elif shop_item == "bonus_reward":
+		bonus_reward_count += 3
+		score_multiplicator += 3
 	item_bought.emit()
 
 func set_is_in_resting_area(b:bool) -> void:
@@ -272,6 +320,20 @@ func set_latest_checkpoint(checkpoint:Vector2):
 
 func set_has_crossed_finish_line(b:bool) -> void:
 	has_crossed_finish_line = b
+
+func set_more_damage_flag() -> void:
+	if more_damage_flag:
+		score_multiplicator -= 1
+	else:
+		score_multiplicator += 1
+	more_damage_flag = !more_damage_flag
+
+func set_more_expensive_shop_flag() -> void:
+	if more_expensive_shop_flag:
+		price_multiplicator -= 1
+	else:
+		price_multiplicator += 1
+	more_expensive_shop_flag = !more_expensive_shop_flag
 
 func get_latest_checkpoint() -> Vector2:
 	return latest_checkpoint
@@ -294,6 +356,9 @@ func get_is_in_shop() -> bool:
 func get_first_loss_flag() -> bool:
 	return first_loss_flag
 
+func get_second_loss_flag() -> bool:
+	return second_loss_flag
+
 func get_first_win_flag() -> bool:
 	return first_win_flag
 
@@ -301,7 +366,7 @@ func get_upgrade_cost(upgrade:String) -> int:
 	return upgrade_cost[upgrade]
 
 func get_shop_item_cost(item:String) -> int:
-	return shop_item_cost[item]
+	return shop_item_cost[item] * price_multiplicator
 
 func get_shop_odds() -> int:
 	return shop_odds
@@ -323,3 +388,9 @@ func get_shop_items_maxed_flag() -> bool:
 
 func get_cheat_death() -> int:
 	return cheat_death
+
+func get_more_damage_flag() -> bool:
+	return more_damage_flag
+
+func get_more_expensive_shop_flag() -> bool:
+	return more_expensive_shop_flag

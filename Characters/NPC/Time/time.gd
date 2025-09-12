@@ -49,5 +49,14 @@ func on_trigger_dialogue() -> void:
 		get_tree().current_scene.add_child(balloon)
 		balloon.start(load("res://Dialogue/conversations/introduction_to_bonus.dialogue"), "start")
 		TimeStateManager.set_flag()
-	elif !GameManager.get_first_win_flag() and GameManager.get_first_loss_flag():
+	elif GameManager.get_second_loss_flag() and !TimeStateManager.get_introduction_to_malus_flag():
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/introduction_to_malus.dialogue"), "start")
+		TimeStateManager.set_flag()
+	elif !TimeStateManager.get_introduction_to_malus_flag() and TimeStateManager.get_introduction_to_bonus_flag():
 		TimeStateManager.start_upgrade_dialogue()
+	elif TimeStateManager.get_introduction_to_malus_flag():
+		var balloon:GameDialogueBalloon = balloon_scene.instantiate()
+		get_tree().current_scene.add_child(balloon)
+		balloon.start(load("res://Dialogue/conversations/chose_malus_bonus.dialogue"), "start")

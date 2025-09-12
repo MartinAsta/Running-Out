@@ -32,6 +32,7 @@ var is_dashing:bool
 var dash_direction:Vector2
 var can_take_portal:bool
 var can_take_shop_portal:bool
+var can_take_boss_portal:bool
 var can_initiate_dialogue:bool
 var can_take_damage:bool
 var can_buy_item:bool
@@ -45,6 +46,7 @@ func _ready() -> void:
 	can_take_shop_portal = false
 	can_take_portal = false
 	is_dashing = false
+	can_take_boss_portal = false
 
 func _physics_process(delta) -> void:
 	SPEED = NORMAL_SPEED * PlayerStateManager.player_speed_multiplicator
@@ -213,6 +215,12 @@ func take_shop_portal() -> void:
 	if Input.is_action_just_pressed("interact"):
 		GameManager.player_takes_shop_portal()
 
+func take_boss_portal() -> void:
+	if !can_take_boss_portal:
+		return
+	if Input.is_action_just_pressed("interact"):
+		GameManager.player_takes_boss_portal()
+
 func buy_shop_item() -> void:
 	if !can_buy_item:
 		return
@@ -265,6 +273,9 @@ func set_can_take_portal(b:bool) -> void:
 
 func set_can_take_shop_portal(b:bool) -> void:
 	can_take_shop_portal = b
+
+func set_can_take_boss_portal(b:bool) -> void:
+	can_take_boss_portal = b
 
 func set_can_initiate_dialogue(b:bool) -> void:
 	can_initiate_dialogue = b

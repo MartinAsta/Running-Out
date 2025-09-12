@@ -16,7 +16,7 @@ var currently_hovered_shop_item:String
 func _ready() -> void:
 	has_unlocked_dash = false
 	is_in_cutscene = false
-	seconds_currency = 5000
+	seconds_currency = 0
 	player_speed_multiplicator = 1
 	player_position = Vector2(0,0)
 	is_facing_right = true

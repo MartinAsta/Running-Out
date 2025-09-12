@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://twb27seph3f2"]
+[gd_scene load_steps=16 format=4 uid="uid://twb27seph3f2"]
 
 [ext_resource type="PackedScene" uid="uid://taqarnefwhp3" path="res://scenes/test/W1_parallax_bg.tscn" id="1_lsv1q"]
 [ext_resource type="PackedScene" uid="uid://bfcyp4dokijwb" path="res://scenes/test/GroundSceneTilemap.tscn" id="2_fxwsb"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://vheivpe0r5np" path="res://scenes/ui/GameScreen.tscn" id="9_sx7jd"]
 [ext_resource type="PackedScene" uid="uid://b55hakkatrlpy" path="res://Characters/NPC/Portal/shop_portal.tscn" id="10_ff2xb"]
 [ext_resource type="PackedScene" uid="uid://df04gag4is3g7" path="res://scenes/traps/spikes.tscn" id="11_yadr1"]
+[ext_resource type="PackedScene" uid="uid://cc5ng8w3qgopa" path="res://Characters/NPC/Portal/boss_portal.tscn" id="12_fxwsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh4to"]
 size = Vector2(4746, 42)
@@ -88,7 +89,7 @@ debug_color = Color(5.58317e-06, 0.627649, 0.499892, 0.42)
 [node name="GameScreen" parent="." instance=ExtResource("9_sx7jd")]
 
 [node name="ShopPortal" parent="." instance=ExtResource("10_ff2xb")]
-position = Vector2(386, -115)
+position = Vector2(409, -115)
 
 [node name="Traps" type="Node" parent="."]
 
@@ -393,3 +394,6 @@ rotation = -1.5708
 [node name="Spike80" parent="Traps" instance=ExtResource("11_yadr1")]
 position = Vector2(978, -96)
 rotation = -1.5708
+
+[node name="BossPortal" parent="." instance=ExtResource("12_fxwsb")]
+position = Vector2(482, -115)

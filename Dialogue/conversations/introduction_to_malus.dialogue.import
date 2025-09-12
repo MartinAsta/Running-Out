@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b3yl4p3jlnr7g"
+path="res://.godot/imported/introduction_to_malus.dialogue-22a8abe7940f0f665f322b96c6644f46.tres"
+
+[deps]
+
+source_file="res://Dialogue/conversations/introduction_to_malus.dialogue"
+dest_files=["res://.godot/imported/introduction_to_malus.dialogue-22a8abe7940f0f665f322b96c6644f46.tres"]
+
+[params]
+
+defaults=true

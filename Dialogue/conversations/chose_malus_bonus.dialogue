@@ -1,0 +1,14 @@
+~ start
+do PlayerStateManager.enter_cutscene()
+TIME: DO YOU WISH TO UPGRADE YOURSELF OR ENABLE AND DISABLE PENALTIES ? ?
+- None.
+	do PlayerStateManager.leave_cutscene()
+	=> END
+- I wish to upgrade myself.
+	do TimeStateManager.start_upgrade_dialogue()
+	=> END
+- I want to disable and enable penalties.
+	do TimeStateManager.start_malus_dialogue()
+	=> END
+do PlayerStateManager.leave_cutscene()
+=> END
