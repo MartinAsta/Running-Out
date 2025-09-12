@@ -60,6 +60,7 @@ func _physics_process(delta) -> void:
 		player_dash(delta)
 		take_portal()
 		take_shop_portal()
+		take_boss_portal()
 		initiate_dialogue()
 		buy_shop_item()
 	else:

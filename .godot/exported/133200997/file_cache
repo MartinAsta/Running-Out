@@ -9,7 +9,7 @@ res://Characters/NPC/Portal/shop_portal.tscn::cf8897161b6d144027afc7be0a4d3e8b::
 res://Characters/NPC/Time/time.tscn::e11c1714dadf8a5f45484b6c4117f139::1757690722::res://.godot/exported/133200997/export-a5c9a8ee8c2f6b7521983d109219b116-time.scn
 res://Characters/Player/dash_after_image_left.tscn::7b61de784ba99abb52977f18652a6552::1755183271::res://.godot/exported/133200997/export-29f3ca94fc8b294509b91841ac39b069-dash_after_image_left.scn
 res://Characters/Player/dash_after_image_right.tscn::d22aad8d5d6185aeedbf66f111dfe3cb::1755183271::res://.godot/exported/133200997/export-1a0ed588e81dd6ecee0d6d7ee4caed7b-dash_after_image_right.scn
-res://Characters/Player/player.tscn::a39a5e46ec02181fe88d168e1131c4e6::1757699933::res://.godot/exported/133200997/export-5ad7ebae7a2753a58156999bf8b71811-player.scn
+res://Characters/Player/player.tscn::a39a5e46ec02181fe88d168e1131c4e6::1757711318::res://.godot/exported/133200997/export-5ad7ebae7a2753a58156999bf8b71811-player.scn
 res://Dialogue/tutorial_dialogue_balloon.tscn::e3e6325a70cd8072b2d47f369a05f86c::1753974240::res://.godot/exported/133200997/export-4c3d70e0b4977b0d24c26d0e47e4696e-tutorial_dialogue_balloon.scn
 res://levels/Peaceful_Levels/lobby.tscn::ff3ecc9c7a8cdd4a67399fbdaccf7a44::1757699932::res://.godot/exported/133200997/export-00c2494b80b701e96327ce7842bf491c-lobby.scn
 res://levels/Peaceful_Levels/shop.tscn::9be74eb6a1b2239573d116892b04d6c1::1757693692::res://.godot/exported/133200997/export-1c9a0184aa0ea481899165ac42bc0398-shop.scn
@@ -27,7 +27,7 @@ res://levels/World1/W1_map9.tscn::8dd3a888e1af226c02248e80c96aad09::1757693611::
 res://levels/World1/W1_map10.tscn::235b9acd5cdbc17f54dd6191d8c21f78::1757693640::res://.godot/exported/133200997/export-e1e5f2b3d41a7d449fe80dce3c852580-W1_map10.scn
 res://scenes/Items/additional_time.tscn::075dd95169014ab39e236f531804990b::1757426877::res://.godot/exported/133200997/export-901bd62e786ba1ee051fd83dc2983e94-additional_time.scn
 res://scenes/Items/nullify_death.tscn::8c66a8a217ad487a63473b6015b33130::1757687385::res://.godot/exported/133200997/export-979b738bdc16b3cfaf87c384511e1ba0-nullify_death.scn
-res://scenes/Items/bonus_reward.tscn::18f4b56e95088fbb15fb2ac48367a3bc::1757699933::res://.godot/exported/133200997/export-326d7774c6235dbd1c895b9f0ca43e1b-bonus_reward.scn
+res://scenes/Items/bonus_reward.tscn::6f102bf7e2751e333772df30d5c1a198::1757711350::res://.godot/exported/133200997/export-326d7774c6235dbd1c895b9f0ca43e1b-bonus_reward.scn
 res://scenes/test/GroundSceneTilemap.tscn::94373d66b1abe5fb64b2855c5a2333f5::1757426878::res://.godot/exported/133200997/export-d98e253d3a8cd58b3703e1d2cebf154a-GroundSceneTilemap.scn
 res://scenes/test/W1_parallax_bg.tscn::d5c374becf043dcab0a2c0a66bad0738::1757419183::res://.godot/exported/133200997/export-f63e6eb3109fa1aea6660e3283cefe46-W1_parallax_bg.scn
 res://scenes/traps/spikes.tscn::f5f55fe23fb7d4041b9ac3793b6d19c3::1757690722::res://.godot/exported/133200997/export-12265c6e2c1431896a4ef3af4cb38f2c-spikes.scn
@@ -42,4 +42,4 @@ res://scenes/checkpoint.tscn::944481863fae2c02edb7f4177131e1d8::1754143263::res:
 res://scenes/fall_detection_area_2d.tscn::26db9f144471bbfcafab2ee23f320dd5::1754143263::res://.godot/exported/133200997/export-2dddccf0f9ab2368247a5b3820d3dba5-fall_detection_area_2d.scn
 res://scenes/FinishLineArea.tscn::c46097e2ed8798388c9ca9b67c4431b0::1754567023::res://.godot/exported/133200997/export-8a6d9e0150469642a123aa51747ddc96-FinishLineArea.scn
 res://scenes/PauseArea.tscn::5e4677d41cfb23a31e1ec9e8927d0d0a::1754568594::res://.godot/exported/133200997/export-ff9aaf21bcbd6353e0d1aa96a06b574e-PauseArea.scn
-res://Tilesets/game_tile_set.tres::e037c8794fe45d8b44b9103f1e604d18::1757677830::res://.godot/exported/133200997/export-0b331570b30f3135ffb40abccc486acf-game_tile_set.res
+res://Tilesets/game_tile_set.tres::e037c8794fe45d8b44b9103f1e604d18::1757711318::res://.godot/exported/133200997/export-0b331570b30f3135ffb40abccc486acf-game_tile_set.res
